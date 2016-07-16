@@ -1,0 +1,11 @@
+#Logs
+/PentahoLogs/*
+*.log
+
+#Others
+/exporthourly/*
+*.gz
+*.csv
+*.zip
+
+
