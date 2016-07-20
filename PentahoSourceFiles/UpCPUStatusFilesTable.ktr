@@ -69,13 +69,117 @@
   <created_date>2016&#x2f;07&#x2f;20 15&#x3a;52&#x3a;15.808</created_date>
   <modified_user>-</modified_user>
   <modified_date>2016&#x2f;07&#x2f;20 15&#x3a;52&#x3a;15.808</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>localhost</name>
+    <server>localhost</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>XE</database>
+    <port>1521</port>
+    <username>calidad</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb1aaf7cd796aede</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
+  <hop> <from>Get Variables</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>localhost</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update files set&#xa;  status &#x3d; &#x28;select case&#xa;                      when tcr.cantidad - &#x28;ff.row_num -1&#x29; &#x21;&#x3d; 0 then 1 else 0&#xa;                   end status&#xa;            from files ff,&#xa;                 &#x28;select count&#x28;1&#x29; cantidad, fecha&#xa;                  from &#x24;&#x7b;TABLE_NAME&#x7d;&#xa;                  group by fecha&#x29; tcr&#xa;            where ff.nombre_csv &#x3d; &#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;&#xa;            and to_char&#x28;tcr.fecha,&#x27;YYYY-MM-DD-HH24&#x27;&#x29; &#x3d;   substr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#xa;                                                              instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,1&#x29;&#x2b;1,--pos del primer .&#xa;                                                              instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,2&#x29;-&#xa;                                                              instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,1&#x29;-1&#x29;&#x29;,&#xa;  procesado &#x3d; sysdate&#xa;where nombre_csv &#x3d; &#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>NOMBRE_UP</name></argument>
+       <argument><name>TABLE_NAME</name></argument>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>400</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>NOMBRE_UP</name>
+        <variable>&#x24;&#x7b;NOMBRE_UP&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>TABLE_NAME</name>
+        <variable>&#x24;&#x7b;TABLE_NAME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>128</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step_error_handling>
   </step_error_handling>
    <slave-step-copy-partition-distribution>

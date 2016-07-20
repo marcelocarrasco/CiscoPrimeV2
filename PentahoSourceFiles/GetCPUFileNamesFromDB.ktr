@@ -76,14 +76,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>falda.claro.amx</name>
-    <server>falda.claro.amx</server>
+    <name>localhost</name>
+    <server>localhost</server>
     <type>ORACLE</type>
     <access>Native</access>
-    <database>DSMART2</database>
+    <database>XE</database>
     <port>1521</port>
-    <username>mcarrasco</username>
-    <password>Encrypted 2be98afc86ae4938aa81cbc72db80a08b</password>
+    <username>calidad</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb1aaf7cd796aede</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -133,7 +133,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>falda.claro.amx</connection>
+    <connection>localhost</connection>
     <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;CPU.&#x25;&#x27;&#xa;order by 1</sql>
     <limit>0</limit>
     <lookup/>

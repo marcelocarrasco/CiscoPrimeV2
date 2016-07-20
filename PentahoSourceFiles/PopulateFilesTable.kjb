@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>LoadCPUIntoTableHOUR</name>
+  <name>PopulateFilesTable</name>
     <description/>
     <extended_description/>
     <job_version/>
+    <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;15 22&#x3a;14&#x3a;37.890</created_date>
+  <created_date>2016&#x2f;02&#x2f;19 15&#x3a;52&#x3a;14.192</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;15 22&#x3a;14&#x3a;37.890</modified_date>
+  <modified_date>2016&#x2f;02&#x2f;19 15&#x3a;52&#x3a;14.192</modified_date>
     <parameters>
     </parameters>
     <slaveservers>
@@ -34,39 +35,6 @@
    <shared_objects_file/>
   <entries>
     <entry>
-      <name>Get CPU File Names From DB</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;GetCPUFileNamesFromDB.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;get_CPU_file_names_from_db_</logfile>
-      <logext>log</logext>
-      <add_date>Y</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>48</yloc>
-      </entry>
-    <entry>
       <name>START</name>
       <description/>
       <type>SPECIAL</type>
@@ -83,50 +51,74 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>48</xloc>
-      <yloc>48</yloc>
+      <xloc>128</xloc>
+      <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Abort job</name>
+      <name>Get CSV File Names For Table FILES</name>
       <description/>
-      <type>ABORT</type>
-      <message>Check log files for problems</message>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>176</yloc>
-      </entry>
-    <entry>
-      <name>Load &#x26; Update</name>
-      <description/>
-      <type>JOB</type>
+      <type>TRANS</type>
       <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadAndUpdate.kjb</filename>
-      <jobname/>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;GetCSVFileNamesForFILESTable.ktr</filename>
+      <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
       <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
+      <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
+      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>48</yloc>
+      <xloc>336</xloc>
+      <yloc>96</yloc>
+      </entry>
+    <entry>
+      <name>Populate Files Table</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateFilesTable.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>Y</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>96</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -135,14 +127,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>576</xloc>
-      <yloc>192</yloc>
+      <xloc>800</xloc>
+      <yloc>96</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Get CPU File Names From DB</to>
+      <to>Get CSV File Names For Table FILES</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -150,17 +142,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Get CPU File Names From DB</from>
-      <to>Abort job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Get CPU File Names From DB</from>
-      <to>Load &#x26; Update</to>
+      <from>Get CSV File Names For Table FILES</from>
+      <to>Populate Files Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -168,7 +151,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load &#x26; Update</from>
+      <from>Populate Files Table</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
