@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>GetCGN_STATSFileNamesFromDB</name>
+    <name>GetNbrINTERFACE_AVAILFilesToCopy</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -66,45 +66,21 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;05&#x2f;02 16&#x3a;53&#x3a;39.373</created_date>
+  <created_date>2016&#x2f;07&#x2f;18 14&#x3a;31&#x3a;47.007</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;02 16&#x3a;53&#x3a;39.373</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+  <modified_date>2016&#x2f;07&#x2f;18 14&#x3a;31&#x3a;47.007</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>falda.claro.amx</name>
-    <server>falda.claro.amx</server>
-    <type>ORACLE</type>
-    <access>Native</access>
-    <database>DSMART2</database>
-    <port>1521</port>
-    <username>mcarrasco</username>
-    <password>Encrypted 2be98afc86ae4938aa81cbc72db80a08b</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
   <order>
-  <hop> <from>Get CGN_STATS File Names From DB</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Run SSH INTERFACE_AVAIL</from><to>Write to log cpu</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log cpu</from><to>Set INTERFACE_AVAIL_CNT Variable</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Copy rows to result</name>
-    <type>RowsToResult</type>
+    <name>Run SSH INTERFACE_AVAIL</name>
+    <type>SSH</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -113,17 +89,34 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <dynamicCommandField>N</dynamicCommandField>
+    <command>find &#x2f;opt&#x2f;CSCOppm-gw&#x2f;reports&#x2f;exporthourly&#x2f;INTERFACE_AVAIL.&#x24;&#x28;date --date&#x3d;&#x27;&#x27;yesterday&#x27;&#x27; &#x2b;&#x25;Y-&#x25;m-&#x25;d&#x29;&#x2a; &#x7c; wc -l&#xa;</command>
+    <commandfieldname/>
+    <port>22</port>
+    <servername>olivera.claro.amx</servername>
+    <userName>calidad</userName>
+    <password>Encrypted 2be98afc86ac4b388a23daf748cc0fb82</password>
+    <usePrivateKey>N</usePrivateKey>
+    <keyFileName/>
+    <passPhrase>Encrypted </passPhrase>
+    <stdOutFieldName>intAvailStdOut</stdOutFieldName>
+    <stdErrFieldName>intAvailStdErr</stdErrFieldName>
+    <timeOut>0</timeOut>
+    <proxyHost/>
+    <proxyPort/>
+    <proxyUsername/>
+    <proxyPassword>Encrypted </proxyPassword>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
+      <xloc>240</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get CGN_STATS File Names From DB</name>
-    <type>TableInput</type>
+    <name>Set INTERFACE_AVAIL_CNT Variable</name>
+    <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -132,23 +125,25 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>falda.claro.amx</connection>
-    <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;CGN_STATS.&#x25;&#x27;&#xa;and procesado is null&#xa;--order by 1</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>Y</lazy_conversion_active>
+    <fields>
+      <field>
+        <field_name>intAvailStdOut</field_name>
+        <variable_name>INTERFACE_AVAIL_CNT</variable_name>
+        <variable_type>ROOT_JOB</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
+      <xloc>640</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Write to log</name>
+    <name>Write to log cpu</name>
     <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
@@ -164,10 +159,16 @@
       <limitRowsNumber>0</limitRowsNumber>
       <logmessage/>
     <fields>
+      <field>
+        <name>intAvailStdOut</name>
+        </field>
+      <field>
+        <name>intAvailStdErr</name>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
+      <xloc>416</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
       </GUI>

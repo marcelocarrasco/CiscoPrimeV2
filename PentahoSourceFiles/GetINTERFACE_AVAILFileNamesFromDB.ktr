@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>GetCGN_STATSFileNamesFromDB</name>
+    <name>GetINTERFACE_AVAILFileNamesFromDB</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -99,7 +100,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get CGN_STATS File Names From DB</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get INTERFACE_AVAIL File Names From DB</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Write to log</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
   </order>
   <step>
@@ -122,7 +123,7 @@
     </step>
 
   <step>
-    <name>Get CGN_STATS File Names From DB</name>
+    <name>Get INTERFACE_AVAIL File Names From DB</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -133,7 +134,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;CGN_STATS.&#x25;&#x27;&#xa;and procesado is null&#xa;--order by 1</sql>
+    <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;INTERFACE_AVAIL.&#x25;&#x27;&#xa;order by 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
