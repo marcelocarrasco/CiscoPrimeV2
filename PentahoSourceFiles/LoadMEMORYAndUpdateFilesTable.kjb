@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>LoadMEMORY_DEVICE_AVGIntoTableHOUR</name>
+  <name>LoadMEMORYAndUpdateFilesTable</name>
     <description/>
     <extended_description/>
     <job_version/>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;15 15&#x3a;49&#x3a;33.053</created_date>
+  <created_date>2016&#x2f;07&#x2f;22 15&#x3a;03&#x3a;10.914</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;15 15&#x3a;49&#x3a;33.053</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;22 15&#x3a;03&#x3a;10.914</modified_date>
     <parameters>
     </parameters>
     <slaveservers>
@@ -34,18 +34,72 @@
    <shared_objects_file/>
   <entries>
     <entry>
-      <name>Get MEMORY_DEVICE_AVG File Names From DB</name>
+      <name>Load MEMORY Raw Data Into HOUR Table</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;GetMEMORY_DEVICE_AVGFileNamesFromDB.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadMEMORYRawDataIntoRawTable.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>Y</params_from_previous>
+      <exec_per_row>Y</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>Y</set_logfile>
+      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;load_CPU_data_into_raw_table_</logfile>
+      <logext>log</logext>
+      <add_date>Y</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>48</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>608</xloc>
+      <yloc>192</yloc>
+      </entry>
+    <entry>
+      <name>Abort job 2</name>
+      <description/>
+      <type>ABORT</type>
+      <message>Check log file for problems</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>240</yloc>
+      </entry>
+    <entry>
+      <name>Up MEMORY Status Files Table</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;UpCPUStatusFilesTable.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>Y</clear_files>
+      <exec_per_row>Y</exec_per_row>
+      <clear_rows>Y</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
@@ -63,8 +117,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>64</yloc>
+      <xloc>608</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
       <name>START</name>
@@ -83,66 +137,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>64</yloc>
-      </entry>
-    <entry>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>240</yloc>
-      </entry>
-    <entry>
-      <name>Load MEMORY_DEVICE_AVERAGE And Update Files Table</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadMEMORY_DEVICE_AVERAGEAndUpdateFilesTable.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>Y</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>64</yloc>
-      </entry>
-    <entry>
-      <name>Abort job</name>
-      <description/>
-      <type>ABORT</type>
-      <message/>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>240</yloc>
+      <xloc>112</xloc>
+      <yloc>48</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Get MEMORY_DEVICE_AVG File Names From DB</to>
+      <to>Load MEMORY Raw Data Into HOUR Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -150,8 +152,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Get MEMORY_DEVICE_AVG File Names From DB</from>
-      <to>Load MEMORY_DEVICE_AVERAGE And Update Files Table</to>
+      <from>Load MEMORY Raw Data Into HOUR Table</from>
+      <to>Up MEMORY Status Files Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -159,7 +161,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load MEMORY_DEVICE_AVERAGE And Update Files Table</from>
+      <from>Up MEMORY Status Files Table</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -168,8 +170,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Get MEMORY_DEVICE_AVG File Names From DB</from>
-      <to>Abort job</to>
+      <from>Load MEMORY Raw Data Into HOUR Table</from>
+      <to>Abort job 2</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

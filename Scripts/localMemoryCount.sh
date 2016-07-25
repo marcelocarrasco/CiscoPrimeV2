@@ -1,1 +1,1 @@
-find /home/calidad/CiscoPrime/exporthourly -maxdepth 1 -name "MEMORY.*.zip" -type f | wc -l
+find /home/oracle/CiscoPrimeV2/exporthourly/MEMORY.$(date --date=''yesterday'' +%Y-%m-%d)* | wc -l

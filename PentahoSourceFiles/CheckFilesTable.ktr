@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>UpCPUStatusFilesTable</name>
+    <name>CheckFilesTable</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -66,10 +66,10 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;20 15&#x3a;52&#x3a;15.808</created_date>
+  <created_date>2016&#x2f;07&#x2f;25 12&#x3a;49&#x3a;20.201</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;20 15&#x3a;52&#x3a;15.808</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+  <modified_date>2016&#x2f;07&#x2f;25 12&#x3a;49&#x3a;20.201</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -99,8 +99,41 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get Variables</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get NOMBRE_UP &#x26; TABLE_NAME Variables</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>ANTES SQL</logmessage>
+    <fields>
+      <field>
+        <name>NOMBRE_UP</name>
+        </field>
+      <field>
+        <name>TABLE_NAME</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>464</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Execute SQL script</name>
     <type>ExecSQL</type>
@@ -113,30 +146,31 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>Y</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>update files set&#xa;  status &#x3d; &#x28;select case&#xa;                      when tcr.cantidad - &#x28;ff.row_num -1&#x29; &#x21;&#x3d; 0 then 1&#xa;					  when tcr.cantidad - &#x28;ff.row_num -1&#x29; &#x3d; 0 then 0&#xa;					  else -1&#xa;                   end status&#xa;            from files ff,&#xa;                 &#x28;select count&#x28;1&#x29; cantidad, fecha&#xa;                  from &#x24;&#x7b;TABLE_NAME&#x7d;&#xa;                  group by fecha&#x29; tcr&#xa;            where ff.nombre_csv &#x3d; &#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;&#xa;            and to_char&#x28;tcr.fecha,&#x27;YYYY-MM-DD-HH24&#x27;&#x29; &#x3d;   substr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#xa;                                                              instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29;&#x29;,--pos del primer .&#xa;                                                              --instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,2&#x29;-&#xa;                                                              --instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,1&#x29;-1&#x29;&#x29;,&#xa;  procesado &#x3d; sysdate&#xa;where nombre_csv &#x3d; &#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;</sql>
+    <sql>merge into files fl&#xa;  using &#x28;select th.fecha_tabla_hour  fecha_tabla_hour,&#xa;                    case&#xa;                      when &#x28;th.cnt_hour - tf.cnt_files&#x29; &#x21;&#x3d; 0 then 1&#xa;                      when &#x28;th.cnt_hour - tf.cnt_files&#x29; &#x3d; 0 then 0&#xa;                      else -1&#xa;                    end total&#xa;            from  &#x28;--filas provenientes de la tabla hour&#xa;                  select  to_char&#x28;fecha,&#x27;YYYY-MM-DD-HH24&#x27;&#x29; fecha_tabla_hour,&#xa;                          count&#x28;1&#x29; cnt_hour&#xa;                  from &#x24;&#x7b;TABLE_NAME&#x7d;&#xa;                  where to_char&#x28;fecha,&#x27;YYYY-MM-DD-HH24&#x27;&#x29; in &#x28; select substr&#x28;nombre_csv,instr&#x28;nombre_csv,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29; &#xa;                                                            from  &#x28;--set de datos&#xa;                                                                  select &#x2a;&#xa;                                                                  from files&#xa;                                                                  where status &#x3d; 1&#xa;                                                                  and nombre_csv like &#x27;&#x24;&#x7b;FILE_NAME&#x7d;&#x27;&#x7c;&#x7c;&#x27;&#x25;&#x27;&#x29;&#x29;&#xa;                  group by to_char&#x28;fecha,&#x27;YYYY-MM-DD-HH24&#x27;&#x29;&#x29; th,&#xa;                  &#x28;--filas provenientes de la tabla files &#xa;                  select  substr&#x28;nombre_csv,instr&#x28;nombre_csv,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29; fecha_files,&#xa;                          sum&#x28;row_num-1&#x29; cnt_files&#xa;                  from files &#xa;                  where substr&#x28;nombre_csv,instr&#x28;nombre_csv,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29; in &#x28;--set de datos&#xa;                                                                              select substr&#x28;nombre_csv,instr&#x28;nombre_csv,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29; fecha&#xa;                                                                              from files&#xa;                                                                              where status &#x3d; 1&#xa;                                                                              and nombre_csv like &#x27;&#x24;&#x7b;FILE_NAME&#x7d;&#x27;&#x7c;&#x7c;&#x27;&#x25;&#x27;&#x29;&#xa;                  and nombre_csv like &#x27;&#x24;&#x7b;FILE_NAME&#x7d;&#x27;&#x7c;&#x7c;&#x27;&#x25;&#x27;&#xa;                  group by substr&#x28;nombre_csv,instr&#x28;nombre_csv,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29;&#x29; tf&#xa;            where th.fecha_tabla_hour &#x3d; tf.fecha_files&#xa;            order by 1&#x29; datos&#xa;  on &#x28;substr&#x28;fl.nombre_csv,instr&#x28;nombre_csv,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29; &#x3d; datos.fecha_tabla_hour&#x29;&#xa;  when matched then&#xa;    update set&#xa;      procesado &#x3d; sysdate,&#xa;      status &#x3d; datos.total</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
     <delete_field/>
     <read_field/>
     <arguments>
+       <argument><name>file_name</name></argument>
        <argument><name>NOMBRE_UP</name></argument>
        <argument><name>TABLE_NAME</name></argument>
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>64</yloc>
+      <xloc>608</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Variables</name>
+    <name>Get NOMBRE_UP &#x26; TABLE_NAME Variables</name>
     <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -174,8 +208,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>128</xloc>
-      <yloc>64</yloc>
+      <xloc>240</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

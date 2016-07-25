@@ -159,8 +159,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
-      <yloc>368</yloc>
+      <xloc>80</xloc>
+      <yloc>400</yloc>
       </entry>
     <entry>
       <name>Unzip Copied Files</name>
@@ -190,8 +190,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>240</yloc>
+      <xloc>688</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>Abort job by Unzip</name>
@@ -201,8 +201,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>736</xloc>
-      <yloc>368</yloc>
+      <xloc>688</xloc>
+      <yloc>304</yloc>
       </entry>
     <entry>
       <name>Populate Files Table</name>
@@ -233,7 +233,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>240</yloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>Abort job by Populate Files Table</name>
@@ -243,8 +243,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>128</yloc>
+      <xloc>144</xloc>
+      <yloc>144</yloc>
       </entry>
     <entry>
       <name>Load INTERFACE_AVAIL Into Table HOUR</name>
@@ -275,7 +275,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>368</yloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>Abort INTERFACE_AVAIL Hourjob</name>
@@ -285,8 +285,36 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
+      <xloc>128</xloc>
+      <yloc>240</yloc>
+      </entry>
+    <entry>
+      <name>Zip INTERFACE_AVAIL processed files</name>
+      <description/>
+      <type>ZIP_FILE</type>
+      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;interface_avail.zip</zipfilename>
+      <compressionrate>2</compressionrate>
+      <ifzipfileexists>1</ifzipfileexists>
+      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface_avail&#x7c;INTERFACE_AVAIL&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
+      <wildcardexclude/>
+      <sourcedirectory>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;</sourcedirectory>
+      <movetodirectory/>
+      <afterzip>1</afterzip>
+      <addfiletoresult>N</addfiletoresult>
+      <isfromprevious>N</isfromprevious>
+      <createparentfolder>N</createparentfolder>
+      <adddate>Y</adddate>
+      <addtime>N</addtime>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <createMoveToDirectory>N</createMoveToDirectory>
+      <include_subfolders>N</include_subfolders>
+      <stored_source_path_depth>1</stored_source_path_depth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
       <xloc>320</xloc>
-      <yloc>464</yloc>
+      <yloc>400</yloc>
       </entry>
   </entries>
   <hops>
@@ -363,15 +391,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load INTERFACE_AVAIL Into Table HOUR</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Populate Files Table</from>
       <to>Load INTERFACE_AVAIL Into Table HOUR</to>
       <from_nr>0</from_nr>
@@ -387,6 +406,24 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Zip INTERFACE_AVAIL processed files</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Load INTERFACE_AVAIL Into Table HOUR</from>
+      <to>Zip INTERFACE_AVAIL processed files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>UpCPUStatusFilesTable</name>
+    <name>GetNbrMEMORYFilesToCopy</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -66,44 +66,21 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;20 15&#x3a;52&#x3a;15.808</created_date>
+  <created_date>2016&#x2f;07&#x2f;22 14&#x3a;25&#x3a;55.788</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;20 15&#x3a;52&#x3a;15.808</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+  <modified_date>2016&#x2f;07&#x2f;22 14&#x3a;25&#x3a;55.788</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>falda.claro.amx</name>
-    <server>falda.claro.amx</server>
-    <type>ORACLE</type>
-    <access>Native</access>
-    <database>DSMART2</database>
-    <port>1521</port>
-    <username>mcarrasco</username>
-    <password>Encrypted 2be98afc86ae4938aa81cbc72db80a08b</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
   <order>
-  <hop> <from>Get Variables</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
+  <hop> <from>Run SSH MEMORY</from><to>Write to log memory</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log memory</from><to>Set MEMORY_COUNT Variable</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Execute SQL script</name>
-    <type>ExecSQL</type>
+    <name>Run SSH MEMORY</name>
+    <type>SSH</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -112,32 +89,34 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>falda.claro.amx</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>Y</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>update files set&#xa;  status &#x3d; &#x28;select case&#xa;                      when tcr.cantidad - &#x28;ff.row_num -1&#x29; &#x21;&#x3d; 0 then 1&#xa;					  when tcr.cantidad - &#x28;ff.row_num -1&#x29; &#x3d; 0 then 0&#xa;					  else -1&#xa;                   end status&#xa;            from files ff,&#xa;                 &#x28;select count&#x28;1&#x29; cantidad, fecha&#xa;                  from &#x24;&#x7b;TABLE_NAME&#x7d;&#xa;                  group by fecha&#x29; tcr&#xa;            where ff.nombre_csv &#x3d; &#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;&#xa;            and to_char&#x28;tcr.fecha,&#x27;YYYY-MM-DD-HH24&#x27;&#x29; &#x3d;   substr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#xa;                                                              instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,1&#x29;&#x2b;1,13&#x29;&#x29;,--pos del primer .&#xa;                                                              --instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,2&#x29;-&#xa;                                                              --instr&#x28;&#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;,&#x27;.&#x27;,1,1&#x29;-1&#x29;&#x29;,&#xa;  procesado &#x3d; sysdate&#xa;where nombre_csv &#x3d; &#x27;&#x24;&#x7b;NOMBRE_UP&#x7d;&#x27;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-       <argument><name>NOMBRE_UP</name></argument>
-       <argument><name>TABLE_NAME</name></argument>
-    </arguments>
+    <dynamicCommandField>N</dynamicCommandField>
+    <command>find &#x2f;opt&#x2f;CSCOppm-gw&#x2f;reports&#x2f;exporthourly&#x2f;MEMORY.&#x24;&#x28;date --date&#x3d;&#x27;&#x27;yesterday&#x27;&#x27; &#x2b;&#x25;Y-&#x25;m-&#x25;d&#x29;&#x2a; &#x7c; wc -l&#xa;</command>
+    <commandfieldname/>
+    <port>22</port>
+    <servername>olivera.claro.amx</servername>
+    <userName>calidad</userName>
+    <password>Encrypted 2be98afc86ac4b388a23daf748cc0fb82</password>
+    <usePrivateKey>N</usePrivateKey>
+    <keyFileName/>
+    <passPhrase>Encrypted </passPhrase>
+    <stdOutFieldName>memoryStdOut</stdOutFieldName>
+    <stdErrFieldName>memoryStdErr</stdErrFieldName>
+    <timeOut>0</timeOut>
+    <proxyHost/>
+    <proxyPort/>
+    <proxyUsername/>
+    <proxyPassword>Encrypted </proxyPassword>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>64</yloc>
+      <xloc>144</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
+    <name>Set MEMORY_COUNT Variable</name>
+    <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -148,34 +127,49 @@
            </partitioning>
     <fields>
       <field>
-        <name>NOMBRE_UP</name>
-        <variable>&#x24;&#x7b;NOMBRE_UP&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>TABLE_NAME</name>
-        <variable>&#x24;&#x7b;TABLE_NAME&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
+        <field_name>memoryStdOut</field_name>
+        <variable_name>MEMORY_COUNT</variable_name>
+        <variable_type>ROOT_JOB</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>128</xloc>
-      <yloc>64</yloc>
+      <xloc>544</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log memory</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>memoryStdOut</name>
+        </field>
+      <field>
+        <name>memoryStdErr</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>320</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
