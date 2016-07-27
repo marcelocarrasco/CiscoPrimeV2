@@ -232,7 +232,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
+      <xloc>368</xloc>
       <yloc>208</yloc>
       </entry>
     <entry>
@@ -326,7 +326,7 @@
       <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;cpu.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;cpu&#x7c;CPU&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
+      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;cpu&#x5c;.&#x7c;CPU&#x5c;.&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
       <wildcardexclude/>
       <sourcedirectory>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;</sourcedirectory>
       <movetodirectory/>

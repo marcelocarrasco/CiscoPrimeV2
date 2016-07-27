@@ -215,12 +215,12 @@
       <yloc>224</yloc>
       </entry>
     <entry>
-      <name>Load CPU Into Table HOUR</name>
+      <name>Load CPU_DEVICE_AVG Into Table HOUR</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCPUIntoTableHOUR.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCPU_DEVICE_AVGIntoTableHOUR.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -242,19 +242,19 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>208</xloc>
+      <xloc>192</xloc>
       <yloc>352</yloc>
       </entry>
     <entry>
-      <name>Abort CPU Hourjob</name>
+      <name>Abort CPU_DEVICE_AVG Hourjob</name>
       <description/>
       <type>ABORT</type>
       <message>Check logs due to errors</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>64</xloc>
-      <yloc>352</yloc>
+      <xloc>192</xloc>
+      <yloc>432</yloc>
       </entry>
     <entry>
       <name>Check Files Table</name>
@@ -291,10 +291,10 @@
       <name>Zip CPU processed files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;cpu.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;cpu_device_avg.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;cpu&#x7c;CPU&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
+      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;cpu_device_avg&#x7c;CPU_DEVICE_AVG&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
       <wildcardexclude/>
       <sourcedirectory>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;</sourcedirectory>
       <movetodirectory/>
@@ -321,7 +321,7 @@
       <type>SIMPLE_EVAL</type>
       <valuetype>variable</valuetype>
       <fieldname/>
-      <variablename>&#x24;&#x7b;CPU_DEVICE_AVG&#x7d;</variablename>
+      <variablename>&#x24;&#x7b;CPU_DEVICE_AVG_COUNT&#x7d;</variablename>
       <fieldtype>number</fieldtype>
       <mask/>
       <comparevalue>&#x24;&#x7b;LOCAL_CPU_DEVICE_AVG_COUNT&#x7d;</comparevalue>
@@ -370,7 +370,7 @@
     </hop>
     <hop>
       <from>Populate Files Table</from>
-      <to>Load CPU Into Table HOUR</to>
+      <to>Load CPU_DEVICE_AVG Into Table HOUR</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -387,8 +387,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load CPU Into Table HOUR</from>
-      <to>Abort CPU Hourjob</to>
+      <from>Load CPU_DEVICE_AVG Into Table HOUR</from>
+      <to>Abort CPU_DEVICE_AVG Hourjob</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -414,7 +414,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load CPU Into Table HOUR</from>
+      <from>Load CPU_DEVICE_AVG Into Table HOUR</from>
       <to>Check Files Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

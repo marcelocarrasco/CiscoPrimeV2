@@ -54,7 +54,7 @@
       <rootzip>N</rootzip>
       <createfolder>N</createfolder>
       <nr_limit>10</nr_limit>
-      <wildcardSource>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;memory&#x7c;MEMORY&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</wildcardSource>
+      <wildcardSource>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;memory&#x5c;.&#x7c;MEMORY&#x5c;.&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</wildcardSource>
       <success_condition>success_if_no_errors</success_condition>
       <iffileexists>OVERWRITE</iffileexists>
       <create_move_to_directory>N</create_move_to_directory>
@@ -84,7 +84,7 @@
       <fields>
         <field>
           <name>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly</name>
-          <filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;memory&#x7c;MEMORY&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</filemask>
+          <filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;memory&#x5c;.&#x7c;MEMORY&#x5c;.&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</filemask>
         </field>
       </fields>
       <parallel>N</parallel>
