@@ -1,1 +1,1 @@
-find /home/calidad/CiscoPrime/exporthourly -maxdepth 1 -name "INTERFACE_ERRORS.*.zip" -type f | wc -l
+find /home/oracle/CiscoPrimeV2/exporthourly/INTERFACE_ERRORS.$(date --date=''yesterday'' +%Y-%m-%d)* | wc -l
