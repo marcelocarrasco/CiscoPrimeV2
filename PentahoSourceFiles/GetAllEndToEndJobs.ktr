@@ -123,7 +123,7 @@
     <file>
       <name>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoSourceFiles</name>
       <filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;EndToEnd&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.kjb</filemask>
-      <exclude_filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;CPU_E&#x7c;MEMORY_E&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.kjb</exclude_filemask>
+      <exclude_filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;CPU_E&#x7c;MEMORY_E&#x7c;PopulateLinks_E&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.kjb</exclude_filemask>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
     </file>
