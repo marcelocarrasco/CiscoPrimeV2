@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>Populate Links En To End</name>
+  <name>Populate Inventory End To End</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;08&#x2f;05 11&#x3a;18&#x3a;55.574</created_date>
+  <created_date>2016&#x2f;08&#x2f;09 14&#x3a;56&#x3a;43.779</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;08&#x2f;05 11&#x3a;18&#x3a;55.574</modified_date>
+  <modified_date>2016&#x2f;08&#x2f;09 14&#x3a;56&#x3a;43.779</modified_date>
     <parameters>
     </parameters>
     <slaveservers>
@@ -51,7 +51,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>96</xloc>
+      <xloc>144</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -84,16 +84,16 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>272</xloc>
+      <xloc>320</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
-      <name>Load CSCO_DEVICE_LINKS_AUX Table</name>
+      <name>Load CSCO_INVENTORY_AUX Table</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCSCO_DEVICE_LINKS_AUXTable.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCSCO_INVENTORY_AUXTable.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -117,7 +117,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>464</xloc>
+      <xloc>528</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -127,7 +127,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
+      <xloc>768</xloc>
       <yloc>48</yloc>
       </entry>
   </entries>
@@ -143,7 +143,7 @@
     </hop>
     <hop>
       <from>Set Environment</from>
-      <to>Load CSCO_DEVICE_LINKS_AUX Table</to>
+      <to>Load CSCO_INVENTORY_AUX Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -151,7 +151,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load CSCO_DEVICE_LINKS_AUX Table</from>
+      <from>Load CSCO_INVENTORY_AUX Table</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
