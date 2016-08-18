@@ -1,14 +1,16 @@
+#!/bin/bash
 
+#export ORACLE_HOME=/oracle/app/oracle/product/12.1.0.2/dbhome
+#export ORACLE_SID=DSMART2
+#export ORAENV_ASK=NO
 
-       
-set serveroutput on
+sqlplus  $1/$2@DSMART2 << EOF 
 declare
   cursor indx is
   select  rownumber,
           substr(linea,6,length(linea)) clave,
           substr(valor,8,length(valor)) valor
   from CSCO_INVENTORY_AUX
-  --where substr(linea,6,length(linea)) in ('key=CommunicationStateEnum','key=InvestigationStateEnum')
   order by rownumber;
   type ini_fin is record(
     rownumber  number,
@@ -26,6 +28,7 @@ declare
   vIndiceFin  varchar2(30 char) := 'InvestigationStateEnum';
   
 begin
+  execute immediate 'TRUNCATE TABLE CSCO_INVENTORY';
   open indx;
   loop
   begin
@@ -47,18 +50,11 @@ begin
                                       SQLCODE,
                                       SQLERRM,
                                       'Error al insertar datos, puede que falte alguna de las columnas necesarias. Ver fila :'||to_char(vContenedor('rownumber')));
---    dbms_output.put_line(to_char(vContenedor('rownumber'))||','||
---                        vContenedor('CommunicationStateEnum')||','||
---                        vContenedor('DeviceName')||','||
---                        substr(vContenedor('DeviceSerialNumber'),1,instr(vContenedor('DeviceSerialNumber'),' ',1))||','||--vContenedor('DeviceSerialNumber')||','||
---                        vContenedor('ElementCategoryEnum')||','||
---                        vContenedor('ElementType')||','||
---                        vContenedor('ElementTypeKey')||','||
---                        vContenedor('IP')||','||
---                        vContenedor('InvestigationStateEnum'));
   end;
   end loop;
   close indx;
   commit;
 end;
-
+/
+exit;
+EOF

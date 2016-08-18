@@ -12,6 +12,7 @@ ROWNUMBER NUMBER
 COMMENT ON COLUMN CSCO_DEVICE_LINKS_AUX.LINEA IS 'Linea original del archivo';
 COMMENT ON COLUMN CSCO_DEVICE_LINKS_AUX.AENDPOINT IS 'Linea armada a partir de la que viene en el archivo';
 COMMENT ON COLUMN CSCO_DEVICE_LINKS_AUX.ZENDPOINT IS 'Linea armada a partir de la que viene en el archivo';
+COMMENT ON COLUMN CSCO_DEVICE_LINKS_AUX.ROWNUMBER IS 'Corresponde al numero de fila en la que se ubica en el archivo de origen';
 
 create table CSCO_DEVICE_LINKS(
 CONTEXTO	VARCHAR2(255 CHAR),
@@ -19,13 +20,15 @@ SEVERITY	VARCHAR2(255 CHAR),
 AENDPOINT	VARCHAR2(255 CHAR),
 BIDIRECTIONAL	CHAR(2),
 ZENDPOINT	VARCHAR2(255 CHAR),
-LINKTYPE 	CHAR(2)) nologging;
+LINKTYPE 	CHAR(2),
+ROWNUMBER NUMBER) nologging;
 
 COMMENT ON COLUMN CSCO_DEVICE_LINKS.CONTEXTO IS 'Reescritura de la columna CONTEXT por ser palabra reservada';
 COMMENT ON COLUMN CSCO_DEVICE_LINKS.AENDPOINT IS 'Reescritura de la columna A End-Point';
 COMMENT ON COLUMN CSCO_DEVICE_LINKS.ZENDPOINT IS 'Reescritura de la columna Z End-Point';
 COMMENT ON COLUMN CSCO_DEVICE_LINKS.LINKTYPE IS 'Reescritura de la columna Link Type';
 COMMENT ON COLUMN CSCO_DEVICE_LINKS.BIDIRECTIONAL IS 'Reescritura de la columna BI DIRECTIONAL';
+COMMENT ON COLUMN CSCO_DEVIVE_LINKS.ROWNUMBER IS 'Corresponde al numero de fila en la que se ubica en el archivo de origen';
 
 --
 -- drop table CSCO_INVENTORY_AUX;
