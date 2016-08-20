@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>CGN_STATS_Rework</name>
+  <name>INTERFACE_AVAIL_Rework</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;19 11&#x3a;14&#x3a;10.948</created_date>
+  <created_date>2016&#x2f;07&#x2f;18 14&#x3a;30&#x3a;03.097</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;19 11&#x3a;14&#x3a;10.948</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;18 14&#x3a;30&#x3a;03.097</modified_date>
     <parameters>
     </parameters>
     <slaveservers>
@@ -62,26 +62,26 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>336</yloc>
+      <xloc>432</xloc>
+      <yloc>352</yloc>
       </entry>
     <entry>
-      <name>Unzip CGN_STATS Copied Files</name>
+      <name>Unzip Copied Files</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x2f;home&#x2f;oracle&#x2f;CiscoPrimeV2&#x2f;PentahoSourceFiles&#x2f;UnzipCGN_STATSFiles.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;UnzipFilesRework.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
-      <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;rwk_unzip_CGN_STATS_copied_files</logfile>
-      <logext>log</logext>
-      <add_date>Y</add_date>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Error</loglevel>
+      <loglevel>Nothing</loglevel>
       <slave_server_name/>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
@@ -93,7 +93,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
+      <xloc>304</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -104,8 +104,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>144</yloc>
+      <xloc>304</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>Populate Files Table</name>
@@ -135,7 +135,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
+      <xloc>464</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -146,16 +146,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>848</xloc>
-      <yloc>48</yloc>
+      <xloc>464</xloc>
+      <yloc>192</yloc>
       </entry>
     <entry>
-      <name>Load CGN_STATS Into Table HOUR Rework</name>
+      <name>Load INTERFACE_AVAIL Into Table HOUR Rework</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCGN_STATSIntoTableHOURRework.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadINTERFACE_AVAILIntoTableHOURRework.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -177,28 +177,28 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>224</yloc>
+      <xloc>720</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
-      <name>Abort CGN_STATS Hourjob</name>
+      <name>Abort INTERFACE_AVAIL Hour</name>
       <description/>
       <type>ABORT</type>
       <message>Check logs due to errors</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>224</yloc>
+      <xloc>944</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
-      <name>Zip CGN_STATS processed files</name>
+      <name>Zip INTERFACE_AVAIL processed files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;rwk_cgn_stats.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;rwk_interface_avail.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;cgn_stats&#x7c;CGN_STATS&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
+      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface_avail&#x7c;INTERFACE_AVAIL&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
       <wildcardexclude/>
       <sourcedirectory>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;</sourcedirectory>
       <movetodirectory/>
@@ -216,11 +216,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>224</yloc>
+      <xloc>720</xloc>
+      <yloc>352</yloc>
       </entry>
     <entry>
-      <name>Check Files Table</name>
+      <name>Check Files Table Rework</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -247,7 +247,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
+      <xloc>720</xloc>
       <yloc>224</yloc>
       </entry>
     <entry>
@@ -286,17 +286,17 @@
   </entries>
   <hops>
     <hop>
-      <from>Unzip CGN_STATS Copied Files</from>
-      <to>Populate Files Table</to>
+      <from>Unzip Copied Files</from>
+      <to>Abort job by Unzip</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Populate Files Table</from>
-      <to>Load CGN_STATS Into Table HOUR Rework</to>
+      <from>Unzip Copied Files</from>
+      <to>Populate Files Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -313,8 +313,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load CGN_STATS Into Table HOUR Rework</from>
-      <to>Abort CGN_STATS Hourjob</to>
+      <from>Populate Files Table</from>
+      <to>Load INTERFACE_AVAIL Into Table HOUR Rework</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Load INTERFACE_AVAIL Into Table HOUR Rework</from>
+      <to>Abort INTERFACE_AVAIL Hour</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -322,35 +331,26 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Unzip CGN_STATS Copied Files</from>
-      <to>Abort job by Unzip</to>
+      <from>Load INTERFACE_AVAIL Into Table HOUR Rework</from>
+      <to>Check Files Table Rework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>N</evaluation>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Zip CGN_STATS processed files</from>
+      <from>Check Files Table Rework</from>
+      <to>Zip INTERFACE_AVAIL processed files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Zip INTERFACE_AVAIL processed files</from>
       <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Load CGN_STATS Into Table HOUR Rework</from>
-      <to>Check Files Table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check Files Table</from>
-      <to>Zip CGN_STATS processed files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -368,7 +368,7 @@
     </hop>
     <hop>
       <from>Set Environment Rework</from>
-      <to>Unzip CGN_STATS Copied Files</to>
+      <to>Unzip Copied Files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
