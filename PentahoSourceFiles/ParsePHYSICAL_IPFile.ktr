@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PopulateCSCO_DEVICE_LINKSTable</name>
+    <name>ParsePHYSICAL_IPFile</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -63,7 +63,6 @@
     </partitionschemas>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
-         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
         <clusterschema>
@@ -78,44 +77,23 @@
         </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;08&#x2f;17 10&#x3a;55&#x3a;05.801</created_date>
+  <created_date>2016&#x2f;08&#x2f;23 11&#x3a;08&#x3a;29.882</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;08&#x2f;17 10&#x3a;55&#x3a;05.801</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+  <modified_date>2016&#x2f;08&#x2f;23 11&#x3a;08&#x3a;29.882</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>falda.claro.amx</name>
-    <server>&#x24;&#x7b;DB-HOST&#x7d;</server>
-    <type>ORACLE</type>
-    <access>Native</access>
-    <database>&#x24;&#x7b;DB-NAME&#x7d;</database>
-    <port>&#x24;&#x7b;DB-PORT&#x7d;</port>
-    <username>&#x24;&#x7b;DB-USER&#x7d;</username>
-    <password>&#x24;&#x7b;DB-PASSWORD&#x7d;</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;DB-PORT&#x7d;</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
   <order>
-  <hop> <from>CSCO_DEVICE_LINKS_AUX</from><to>CSCO_DEVICE_LINKS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Modified Java Script Value</to><enabled>N</enabled> </hop>
+  <hop> <from>Modified Java Script Value</from><to>Write to log</to><enabled>N</enabled> </hop>
+  <hop> <from>Write to log</from><to>Execute a process</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>CSCO_DEVICE_LINKS</name>
-    <type>TableOutput</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -124,60 +102,43 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>falda.claro.amx</connection>
-    <schema/>
-    <table>CSCO_DEVICE_LINKS</table>
-    <commit>20000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
     <fields>
-        <field>
-          <column_name>AENDPOINT</column_name>
-          <stream_name>AENDPOINT</stream_name>
-        </field>
-        <field>
-          <column_name>LINKTYPE</column_name>
-          <stream_name>LINKTYPE</stream_name>
-        </field>
-        <field>
-          <column_name>ZENDPOINT</column_name>
-          <stream_name>ZENDPOINT</stream_name>
-        </field>
-        <field>
-          <column_name>ROWNUMBER</column_name>
-          <stream_name>ROWNUMBER</stream_name>
-        </field>
-        <field>
-          <column_name>PORTNUMBERA</column_name>
-          <stream_name>PORTNUMBERA</stream_name>
-        </field>
-        <field>
-          <column_name>PORTNUMBERZ</column_name>
-          <stream_name>PORTNUMBERZ</stream_name>
-        </field>
+      <field>
+        <name>CISCO-MAKEKVP</name>
+        <variable>&#x24;&#x7b;CISCO-MAKEKVP&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+      <field>
+        <name>CISCO-HOME</name>
+        <variable>&#x24;&#x7b;CISCO-HOME&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
-      <yloc>80</yloc>
+      <xloc>128</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>CSCO_DEVICE_LINKS_AUX</name>
-    <type>TableInput</type>
+    <name>Modified Java Script Value</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -186,17 +147,78 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>falda.claro.amx</connection>
-    <sql>SELECT&#xa;  AENDPOINT&#xa;, CASE&#xa;    WHEN REGEXP_LIKE&#x28;PORTNUMBERA,&#x27;&#x5e;TenGigE&#x5b;0-9&#x5d;&#x27;&#x29; THEN &#xa;        REPLACE&#x28;REGEXP_REPLACE&#x28;PORTNUMBERA,&#x27;TenGigE&#x27;,&#x27;TenGigabitEthernet&#x27;&#x29;,&#x27;-&#x27;,&#x27;&#x2f;&#x27;&#x29;&#xa;    ELSE PORTNUMBERA&#xa;  END PORTNUMBERA&#xa;, LINKTYPE&#xa;, ZENDPOINT&#xa;, PORTNUMBERZ&#xa;, ROWNUMBER&#xa;FROM CSCO_DEVICE_LINKS_AUX&#xa;WHERE AENDPOINT IS NOT NULL&#xa;AND	  PORTNUMBERA IS NOT NULL&#xa;AND	  LINKTYPE IS NOT NULL&#xa;AND	  ZENDPOINT IS NOT NULL&#xa;AND	  PORTNUMBERZ IS NOT NULL&#xa;ORDER BY ROWNUMBER</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>Y</lazy_conversion_active>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xa;&#xa;var shell_command &#x3d; &#x27;sh &#x27;&#x2b;getEnvironmentVar&#x28;&#x27;CISCO-SCRIPTS&#x27;&#x29;&#x2b;&#x27;&#x2f;makeKVP.sh &#x5c;&#x27;&#x27;&#x2b;getEnvironmentVar&#x28;&#x27;CISCO-HOME&#x27;&#x29;&#x2b;&#x27;&#x2f;exporthourly&#x2f;ANA_BQL_NEs_Netcracker_Preliminar_PHYSICAL_IP.xml&#x5c;&#x27; &#x27;&#x2b;&#x27;&#x5c;&#x27;&#x27;&#x2b;getEnvironmentVar&#x28;&#x27;CISCO-HOME&#x27;&#x29;&#x2b;&#x27;&#x2f;exporthourly&#x2f;ANA_BQL_NEs_Netcracker_Preliminar_PHYSICAL_IP_COMMA.csv&#x5c;&#x27;&#x27;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>shell_command</name>
+        <rename>shell_command</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>320</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>CISCO-MAKEKVP</name>
+        </field>
+      <field>
+        <name>CISCO-HOME</name>
+        </field>
+      </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>208</xloc>
-      <yloc>80</yloc>
+      <xloc>496</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Execute a process</name>
+    <type>ExecProcess</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <processfield>CISCO-MAKEKVP</processfield>
+    <resultfieldname>Result</resultfieldname>
+    <errorfieldname>Error</errorfieldname>
+    <exitvaluefieldname>Exit</exitvaluefieldname>
+    <failwhennotsuccess>Y</failwhennotsuccess>
+    <outputlinedelimiter/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

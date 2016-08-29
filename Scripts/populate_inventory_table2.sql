@@ -39,8 +39,8 @@ begin
       vContenedor(vIniFinTab(1).clave) := vIniFinTab(1).valor;
       vIndice := vIniFinTab(1).clave;
     end loop;
-    insert into CSCO_INVENTORY (DEVICE,DEVICE_SERIES,ELEMENT_TYPE,IP_ADDRESS)
-    values (vContenedor('DeviceName'),substr(vContenedor('DeviceSerialNumber'),1,instr(vContenedor('DeviceSerialNumber'),' ',1)),vContenedor('ElementType'),vContenedor('IP'));
+    insert into CSCO_INVENTORY (INVENTORY_ID,DEVICE,DEVICE_SERIES,ELEMENT_TYPE,IP_ADDRESS)
+    values (standard_hash(vContenedor('DeviceName'), 'MD5'),vContenedor('DeviceName'),substr(vContenedor('DeviceSerialNumber'),1,instr(vContenedor('DeviceSerialNumber'),' ',1)),vContenedor('ElementType'),vContenedor('IP'));
     EXCEPTION
           WHEN OTHERS THEN
             G_ERROR_LOG_NEW.P_LOG_ERROR('P_INVENTORY_INS',
