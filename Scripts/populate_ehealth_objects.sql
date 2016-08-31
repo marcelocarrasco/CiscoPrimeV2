@@ -2,7 +2,7 @@
 --**********************************************************************************--
 -- SECUENCIA PARA GENERAR EL ELEMENT_ID DE LA TABLA EHEALTH_OBJECTS
 --**********************************************************************************--
-
+DROP SEQUENCE EHEALTH_ELEMENT_ID_SEQ;
 CREATE SEQUENCE EHEALTH_ELEMENT_ID_SEQ INCREMENT BY 1 START WITH 4000000 MAXVALUE 9999999999999999999999999 NOCACHE;
 
 --**********************************************************************************--
@@ -11,7 +11,17 @@ CREATE SEQUENCE EHEALTH_ELEMENT_ID_SEQ INCREMENT BY 1 START WITH 4000000 MAXVALU
 
 SELECT  'UPDATE EHEALTH_OBJECTS_AUX SET ELEMENT_ALIASES_NEW = '''||CSCO.ELEMENT_ALIASES||
         ''' WHERE ELEMENT_ID = '||HIST.ELEMENT_ID||';'
-FROM  CSCO_DEVICE_LINKS CSCO,
+FROM  (SELECT AENDPOINT,
+              PORTNUMBERA,
+              ZENDPOINT,
+              PORTNUMBERZ,
+              LINKTYPE,
+              ROWNUMBER,
+              ELEMENT_ALIASES,
+              ROW_NUMBER() OVER (PARTITION BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ
+                                ORDER BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ) rn
+      FROM  CSCO_DEVICE_LINKS) CSCO,
+-- 
       (SELECT ELEMENT_ID,
               ELEMENT_NAME,
               INTERFACE_NAME_NEW
@@ -20,78 +30,170 @@ FROM  CSCO_DEVICE_LINKS CSCO,
       AND GRUPO != 'IPRAN') HIST
 WHERE HIST.ELEMENT_NAME = AENDPOINT
 AND   HIST.INTERFACE_NAME_NEW = PORTNUMBERA
+AND   CSCO.rn = 1
 ORDER BY HIST.ELEMENT_ID;
---
-select  eoh.element_id,
-        eoh.element_aliases,
-        eoh.element_name,
-        eoh.interface_name_new,
-        --eoh.element_name||'-'||eoh.interface_name_new element_aliases_new,
-        cdl.aendpoint||'-'||cdl.portnumbera||'_to_'||cdl.ZENDPOINT||'-'||cdl.PORTNUMBERZ element_aliases_new,
-        cdl.aendpoint,
-        cdl.portnumbera,
-        cdl.ZENDPOINT,
-        cdl.PORTNUMBERZ
-        
-from  EHEALTH_OBJECTS_AUX eoh,
-      CSCO_DEVICE_LINKS cdl
-where EOH.FLAG_ENABLED = 'S'
-and EOH.GRUPO != 'IPRAN'
-and EOH.INTERFACE_NAME_NEW is not null
-and EOH.ELEMENT_NAME = CDL.AENDPOINT
-and EOH.INTERFACE_NAME_NEW = CDL.PORTNUMBERA;
+
 --**--**--**--**--**--**--**--**--**--**--**--**--**--
 -- INSERTA LOS LINKS EN LA TABLA EHEALTH_OBJECTS
 --**--**--**--**--**--**--**--**--**--**--**--**--**--
-select  null                                                              ELEMENT_ID,
-        AENDPOINT||'-'||PORTNUMBERA||'_to_'||ZENDPOINT||'-'||PORTNUMBERZ  ELEMENT_ALIASES,
-        TRUNC(SYSDATE)                                                    VALID_START_DATE,
-        TRUNC(SYSDATE)                                                    VALID_FINISH_DATE,
-        NULL                                                              TIPO,
-        AENDPOINT                                                         ORIGEN,
-        ZENDPOINT                                                         DESTINO,
-        'S'                                                               FLAG_ENABLED,
-        NULL                                                              GRUPO,
-        NULL                                                              PAIS,
-        'RouterCisco'                                                     ELEMENT_TYPE,
-        AENDPOINT                                                         ELEMENT_NAME,
-        PORTNUMBERA                                                       INTERFACE_NAME,
-        NULL                                                              GROUP_TYPE,
-        NULL                                                              ELEMENT_IP,
-        NULL                                                              NOMBRE_GRUPO,	
-        NULL                                                              FRONTERA	
-        --PORTNUMBERZ,
-from  (select eoh.element_id,
-              eoh.element_aliases element_aliases_ori,
-              eoh.element_name,
-              eoh.interface_name_new,
-              --eoh.element_name||'-'||eoh.interface_name_new element_aliases_new,
-              --cdl.aendpoint||'-'||cdl.portnumbera||'_to_'||cdl.ZENDPOINT||'-'||cdl.PORTNUMBERZ element_aliases_new,
-              cdl.element_aliases element_aliases_new,
-              cdl.aendpoint,
-              cdl.portnumbera,
-              cdl.ZENDPOINT,
-              cdl.PORTNUMBERZ
-              
-      from  EHEALTH_OBJECTS_AUX eoh,
-            CSCO_DEVICE_LINKS cdl
-      where EOH.FLAG_ENABLED = 'S'
-      and EOH.GRUPO != 'IPRAN'
-      and EOH.INTERFACE_NAME_NEW is not null
-      and EOH.ELEMENT_NAME = CDL.AENDPOINT
-      and EOH.INTERFACE_NAME_NEW = CDL.PORTNUMBERA) 
-
-
-/*(select AENDPOINT,
+SELECT  (SELECT EHEALTH_ELEMENT_ID_SEQ.NEXTVAL() FROM DUAL) ELEMENT_ID,
+        DATOS.ELEMENT_ALIASES             ELEMENT_ALIASES,
+        TRUNC(SYSDATE)                    VALID_START_DATE,
+        TRUNC(SYSDATE)                    VALID_FINISH_DATE,
+        NULL                              TIPO,
+        DATOS.AENDPOINT                   ORIGEN,
+        DATOS.ZENDPOINT                   DESTINO,
+        'S'                               FLAG_ENABLED,
+        NULL                              GRUPO,
+        NULL                              PAIS,
+        'RouterCisco'                     ELEMENT_TYPE,
+        DATOS.AENDPOINT                   ELEMENT_NAME,
+        DATOS.PORTNUMBERA                 INTERFACE_NAME,
+        NULL                              GROUP_TYPE,
+        NULL                              ELEMENT_IP,
+        NULL                              NOMBRE_GRUPO,	
+        NULL                              FRONTERA,
+        NULL                              SPEED_MODIFY
+FROM  ( 
+      SELECT  AENDPOINT,
               PORTNUMBERA,
               ZENDPOINT,
               PORTNUMBERZ,
               LINKTYPE,
               ROWNUMBER,
-              row_number() over (partition by AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ
-                                order by AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ) rn
-        from csco_device_links)*/
---where rn = 1;
+              ELEMENT_ALIASES,
+              ROW_NUMBER() OVER (PARTITION BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ
+                                 ORDER BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ) rn
+      FROM  
+            (-- ELEMENT_ALIASES que estan en CSCO_DEVICE_LINKS y no en EHEALTH_OBJECTS
+            SELECT  ELEMENT_ALIASES ELEMENT_ALIASES_NEW
+            FROM    CSCO_DEVICE_LINKS CSCO    
+            MINUS
+            SELECT  ELEMENT_ALIASES_NEW
+            FROM    EHEALTH_OBJECTS_AUX EOH
+            WHERE   EOH.FLAG_ENABLED  = 'S'
+            AND     EOH.GRUPO         != 'IPRAN'
+            AND     EOH.ELEMENT_ALIASES_NEW IS NOT NULL) LINKS,
+            CSCO_DEVICE_LINKS CDL
+      WHERE LINKS.ELEMENT_ALIASES_NEW = CDL.ELEMENT_ALIASES) DATOS
+WHERE DATOS.rn = 1;
+--***********************************************************************--
+-- ELEMENT_ALIASES QUE ESTAN EN EHEALTH_OJECTS (HABILITADOS)
+--***********************************************************************--
+
+-- ELEMENT_ALIASES que estan en CSCO_DEVICE_LINKS y no en EHEALTH_OBJECTS
+SELECT  ELEMENT_ALIASES ELEMENT_ALIASES_NEW
+FROM  (
+      SELECT  AENDPOINT,
+              PORTNUMBERA,
+              ZENDPOINT,
+              PORTNUMBERZ,
+              LINKTYPE,
+              ROWNUMBER,
+              ELEMENT_ALIASES--,
+--              ROW_NUMBER() OVER (PARTITION BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ
+--                                ORDER BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ) rn
+      FROM  CSCO_DEVICE_LINKS) CSCO
+--WHERE CSCO.rn = 1
+MINUS
+SELECT  ELEMENT_ALIASES_NEW
+FROM  EHEALTH_OBJECTS_AUX EOH
+WHERE EOH.FLAG_ENABLED = 'S'
+AND EOH.GRUPO != 'IPRAN'
+AND EOH.ELEMENT_ALIASES_NEW IS NOT NULL;
+--******************************************--
+-- POPULAR EHEALTH_STAT_IP_HOUR
+--******************************************--
+WITH  DATOS_EHEALTH_OBJECTS AS (SELECT  /*+ MATERIALIZE */
+                                        EOH.ELEMENT_ID,
+                                        EOH.ELEMENT_NAME,
+                                        EOH.INTERFACE_NAME
+                                FROM    EHEALTH_OBJECTS_AUX EOH
+                                WHERE   EOH.FLAG_ENABLED = 'S'
+                                AND     EOH.GRUPO != 'IPRAN'),
+      DATOS_INTERFACES  AS  (SELECT /*+ MATERIALIZE */
+                                    CIH.FECHA                         FECHA,
+                                    DEO.ELEMENT_ID                    ELEMENT_ID,
+                                    ROUND(CIH.RECEIVEBYTES*8/3600,2)  RECEIVEBYTES,
+                                    ROUND(CIH.SENDBYTES*8/3600,2)     SENDBYTES,
+                                    ROUND(CIH.IFSPEED/1000/1000,2)    IFSPEED,
+                                    ROUND(CIH.RECEIVEDISCARDS/3600,2) RECEIVEDISCARDS,
+                                    ROUND(CIH.SENDDISCARDS/3600,2)    SENDDISCARDS,
+                                    CIH.RECEIVEERRORS                 RECEIVEERRORS,
+                                    CIH.SENDERRORS                    SENDERRORS,
+                                    CIH.RECEIVETOTALPKTRATE           RECEIVETOTALPKTRATE,
+                                    CIH.SENDTOTALPKTRATE              SENDTOTALPKTRATE,
+                                    CIE.INQUEUEDROPS                  INQUEUEDROPS,
+                                    CIE.OUTQUEUEDROPS                 OUTQUEUEDROPS,
+                                    CIA.UPPERCENT                     UPPERCENT,
+                                    CIH.SENDUTIL                      SENDUTIL,
+                                    CIH.SENDTOTALPKTS                 SENDTOTALPKTS,
+                                    CIH.SENDUCASTPKTPERCENT           SENDUCASTPKTPERCENT,
+                                    CIH.SENDMCASTPKTPERCENT           SENDMCASTPKTPERCENT,
+                                    CIH.SENDBCASTPKTPERCENT           SENDBCASTPKTPERCENT,
+                                    CIH.SENDERRORPERCENT              SENDERRORPERCENT,
+                                    CIH.SENDDISCARDPERCENT            SENDDISCARDPERCENT,
+                                    CIH.RECEIVEUTIL                   RECEIVEUTIL,
+                                    CIH.RECEIVETOTALPKTS              RECEIVETOTALPKTS,
+                                    CIH.RECEIVEUCASTPKTPERCENT        RECEIVEUCASTPKTPERCENT,
+                                    CIH.RECEIVEMCASTPKTPERCENT        RECEIVEMCASTPKTPERCENT,
+                                    CIH.RECEIVEBCASTPKTPERCENT        RECEIVEBCASTPKTPERCENT,
+                                    CIH.RECEIVEERRORPERCENT           RECEIVEERRORPERCENT,
+                                    CIH.RECEIVEDISCARDPERCENT         RECEIVEDISCARDPERCENT,
+                                    CIH.SENDBCASTPKTRATE              SENDBCASTPKTRATE,
+                                    CIH.RECEIVEBCASTPKTRATE           RECEIVEBCASTPKTRATE
+                            FROM  DATOS_EHEALTH_OBJECTS DEO 
+                            JOIN  CSCO_INTERFACE_HOUR CIH ON (DEO.ELEMENT_NAME  = CIH.NODE 
+                                                             AND DEO.INTERFACE_NAME_NEW  = CIH.INTERFAZ)
+                            JOIN  CSCO_INTERFACE_AVAIL_HOUR CIA ON (CIH.FECHA = CIA.FECHA 
+                                                                    AND CIH.NODE = CIA.NODE 
+                                                                    AND CIH.INTERFAZ = CIA.INTERFACE_DISP)
+                            JOIN  CSCO_INTERFACE_ERRORS_HOUR  CIE ON  (CIA.FECHA  = CIE.FECHA
+                                                                      AND CIA.NODE  = CIE.NODE
+                                                                      AND CIA.INTERFACE_DISP  = CIE.IFEXTIFDESCR)
+                            WHERE TRUNC(CIH.FECHA) = '23.08.2016'
+                            --AND CIH.NODE = 'ngry01sw14'
+                            )
+SELECT  FECHA,
+        ELEMENT_ID,
+        RECEIVEBYTES,
+        SENDBYTES,
+        IFSPEED,
+        RECEIVEDISCARDS,
+        SENDDISCARDS,
+        RECEIVEERRORS,
+        SENDERRORS,
+        RECEIVETOTALPKTRATE,
+        SENDTOTALPKTRATE,
+        INQUEUEDROPS,
+        OUTQUEUEDROPS,
+        UPPERCENT,
+        SENDUTIL,
+        SENDTOTALPKTS,
+        SENDUCASTPKTPERCENT,
+        SENDMCASTPKTPERCENT,
+        SENDBCASTPKTPERCENT,
+        SENDERRORPERCENT,
+        SENDDISCARDPERCENT,
+        RECEIVEUTIL,
+        RECEIVETOTALPKTS,
+        RECEIVEUCASTPKTPERCENT,
+        RECEIVEMCASTPKTPERCENT,
+        RECEIVEBCASTPKTPERCENT,
+        RECEIVEERRORPERCENT,
+        RECEIVEDISCARDPERCENT,
+        SENDBCASTPKTRATE,
+        RECEIVEBCASTPKTRATE
+FROM    DATOS_INTERFACES;
+
+
+SELECT  ELEMENT_ID,
+        ELEMENT_NAME,
+        INTERFACE_NAME_NEW
+FROM  EHEALTH_OBJECTS_AUX EOH
+WHERE EOH.FLAG_ENABLED = 'S'
+AND   EOH.GRUPO != 'IPRAN'
+AND   EOH.ELEMENT_ALIASES_NEW IS NOT NULL;
 
 --***********************************--
 -- Modificacion Historico
@@ -327,6 +429,7 @@ select  'update ehealth_objects_aux set interface_name_new = '''||
 from ehealth_objects
 where GRUPO != 'IPRAN'
 and REGEXP_LIKE(interface_name,'^TenGiga_[0-9]');
+
 --
 --TenGigabitEthernet9-0-1,TenGigabitEthernet2-4,TenGigabitEthernet2-4
 select  'update ehealth_objects_aux set interface_name_new = '''||
@@ -347,3 +450,20 @@ update ehealth_objects_aux set
   INTERFACE_NAME_NEW = replace(INTERFACE_NAME_NEW,'_','/')
 where ELEMENT_ID = 2639233;
 
+-- Reemplazo de los datos de TenGigE en las tablas de INTERFACE
+--
+--TenGigE
+set pagesize 50000
+set lines 200
+set feedback off
+set title off
+set echo off
+spool /home/oracle/CiscoPrimeV2/Scripts/upTenGigE.sql
+select  'update csco_interface_hour set interfaz = '''||
+        replace(
+        regexp_replace(interfaz,'TenGigE','TenGigabitEthernet'),'.','/')
+        ||
+        ''' where node = '''||node||''' and interfaz = '''||interfaz||''';'       
+from csco_interface_hour
+where REGEXP_LIKE(interfaz,'^TenGigE[0-9]');
+spool off
