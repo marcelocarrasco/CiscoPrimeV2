@@ -3,13 +3,12 @@ set lines 200
 set feedback off
 set title off
 set echo off
-spool /home/oracle/CiscoPrimeV2/Scripts/upTenGigE.sql
-select  'update csco_interface_hour set interfaz = '''||
-        replace(
-        regexp_replace(interfaz,'TenGigE','TenGigabitEthernet'),'.','/')
+spool /home/oracle/CiscoPrimeV2/Scripts/upDotSlash.sql
+select  'update csco_interface_avail_hour set interface_disp = '''||
+        replace(interface_disp,'.','/')
         ||
-        ''' where node = '''||node||''' and interfaz = '''||interfaz||''';' as linea      
-from csco_interface_hour
-where REGEXP_LIKE(interfaz,'^TenGigE[0-9]');
+        ''' where node = '''||node||''' and interface_disp = '''||interface_disp||''';'  linea     
+from csco_interface_avail_hour
+where regexp_instr(interface_disp,'[0-9][.][0-9]') != 0;
 spool off
 exit;

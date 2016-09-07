@@ -144,14 +144,14 @@ WITH  DATOS_EHEALTH_OBJECTS AS (SELECT  /*+ MATERIALIZE */
                                     CIH.RECEIVEBCASTPKTRATE           RECEIVEBCASTPKTRATE
                             FROM  DATOS_EHEALTH_OBJECTS DEO 
                             JOIN  CSCO_INTERFACE_HOUR CIH ON (DEO.ELEMENT_NAME  = CIH.NODE 
-                                                             AND DEO.INTERFACE_NAME_NEW  = CIH.INTERFAZ)
+                                                             AND DEO.INTERFACE_NAME  = CIH.INTERFAZ)
                             JOIN  CSCO_INTERFACE_AVAIL_HOUR CIA ON (CIH.FECHA = CIA.FECHA 
                                                                     AND CIH.NODE = CIA.NODE 
                                                                     AND CIH.INTERFAZ = CIA.INTERFACE_DISP)
                             JOIN  CSCO_INTERFACE_ERRORS_HOUR  CIE ON  (CIA.FECHA  = CIE.FECHA
                                                                       AND CIA.NODE  = CIE.NODE
                                                                       AND CIA.INTERFACE_DISP  = CIE.IFEXTIFDESCR)
-                            WHERE TRUNC(CIH.FECHA) = '23.08.2016'
+                            WHERE TRUNC(CIH.FECHA) = trunc(sysdate-13)--'20.08.2016'
                             --AND CIH.NODE = 'ngry01sw14'
                             )
 SELECT  FECHA,
@@ -458,12 +458,29 @@ set lines 200
 set feedback off
 set title off
 set echo off
-spool /home/oracle/CiscoPrimeV2/Scripts/upTenGigE.sql
-select  'update csco_interface_hour set interfaz = '''||
+spool /home/oracle/CiscoPrimeV2/Scripts/upTenGigEIntAvail.sql
+select  'update csco_interface_avail_hour set interface_disp = '''||
         replace(
-        regexp_replace(interfaz,'TenGigE','TenGigabitEthernet'),'.','/')
+        regexp_replace(interface_disp,'TenGigE','TenGigabitEthernet'),'.','/')
         ||
-        ''' where node = '''||node||''' and interfaz = '''||interfaz||''';'       
-from csco_interface_hour
-where REGEXP_LIKE(interfaz,'^TenGigE[0-9]');
+        ''' where node = '''||node||''' and interface_disp = '''||interface_disp||''';'       
+from csco_interface_avail_hour
+where REGEXP_LIKE(interface_disp,'^TenGigE[0-9]')
+group by NODE,INTERFACE_DISP
+order by NODE;
 spool off
+
+select  'update csco_interface_avail_hour set interface_disp = '''||
+        replace(interface_disp,'.','/')
+        ||
+        ''' where node = '''||node||''' and interface_disp = '''||interface_disp||''';'  linea     
+from csco_interface_avail_hour
+where regexp_instr(interface_disp,'[0-9][.][0-9]') != 0; --REGEXP_LIKE(interface_disp,'^Bundle-Ether[0-9]\.')
+--group by NODE,INTERFACE_DISP
+--order by NODE;
+
+
+select node,interface_disp,regexp_instr(interface_disp,'[0-9][.][0-9]')
+from csco_interface_avail_hour
+where regexp_instr(interface_disp,'[0-9][.][0-9]') != 0;
+

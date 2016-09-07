@@ -1,55 +1,80 @@
 
 -- BH
 --
-SELECT  FECHA.
-        NODE.
-        CPUUTILMAX5MINDEVICEAVG.
-        CPUUTILAVG5MINDEVICEAVG.
-        CPUUTILMAX1MINDEVICEAVG.
-        CPUUTILAVG1MINDEVICEAVG.
-        USEDBYTESDEVICEAVG.
-        FREEBYTESDEVICEAVG.
-        AVGUTILDEVICEAVG.
+INSERT INTO CSCO_CPU_MEM_DEVICE_AVG_BH (FECHA,NODE,CPUUTILMAX5MINDEVICEAVG,CPUUTILAVG5MINDEVICEAVG,CPUUTILMAX1MINDEVICEAVG,
+                                      CPUUTILAVG1MINDEVICEAVG,USEDBYTESDEVICEAVG,FREEBYTESDEVICEAVG,AVGUTILDEVICEAVG,MAXUTILDEVICEAVG)
+WITH  SENDBYTES AS  (SELECT /*+ MATERIALIZE */
+                            FECHA,
+                            NODE,
+                            MAX(SENDBYTES) AS SENDBYTES_MAX
+                    FROM CSCO_INTERFACE_HOUR
+                    WHERE TO_CHAR(FECHA,'DD.MM.YYYY') = '28.07.2016'
+                    GROUP BY FECHA,NODE
+                    ORDER BY SENDBYTES_MAX DESC),
+      RECEIVEBYTES AS (SELECT /*+ MATERIALIZE */
+                              FECHA,
+                              NODE,
+                              MAX(RECEIVEBYTES) AS RECEIVEBYTES_MAX
+                      FROM CSCO_INTERFACE_HOUR
+                      WHERE TO_CHAR(FECHA,'DD.MM.YYYY') = '28.07.2016'
+                      GROUP BY FECHA,NODE
+                      ORDER BY  RECEIVEBYTES_MAX DESC),
+      MAX_SENDBYTES AS  (SELECT FECHA,
+                                NODE,
+                                SENDBYTES_MAX
+                        FROM  SENDBYTES
+                        WHERE ROWNUM = 1),
+      MAX_RECEIVEBYTES  AS  (SELECT FECHA,
+                                    NODE,
+                                    RECEIVEBYTES_MAX
+                            FROM  RECEIVEBYTES
+                            WHERE ROWNUM = 1)
+SELECT  FECHA,
+        CCDVAH.NODE NODE,
+        CPUUTILMAX5MINDEVICEAVG,
+        CPUUTILAVG5MINDEVICEAVG,
+        CPUUTILMAX1MINDEVICEAVG,
+        CPUUTILAVG1MINDEVICEAVG,
+        USEDBYTESDEVICEAVG,
+        FREEBYTESDEVICEAVG,
+        AVGUTILDEVICEAVG,
         MAXUTILDEVICEAVG
-FROM  (--TOMAR MAXIMO VALOR ENTRE SENDBYTES O RECEIVEBYTES		
-      SELECT  to_char(FECHA,'dd.mm.yyyy HH24:MI') FECHA,
-              NODE,
-              CPUUTILMAX5MINDEVICEAVG,
-              CPUUTILAVG5MINDEVICEAVG,
-              CPUUTILMAX1MINDEVICEAVG,
-              CPUUTILAVG1MINDEVICEAVG,
-              USEDBYTESDEVICEAVG,
-              FREEBYTESDEVICEAVG,
-              AVGUTILDEVICEAVG,
-              MAXUTILDEVICEAVG,                 
-              ROW_NUMBER()  OVER (PARTITION BY  TRUNC(FECHA,'DAY'),
-                                                NODE
-                            ORDER BY trunc(FECHA) DESC,
-                                     NODE DESC NULLS LAST) SEQNUM
-            FROM CSCO_CPU_MEM_DEVICE_AVG_HOUR
-            WHERE trunc(FECHA) = TO_DATE(P_FECHA,'dd.mm.yyyy')
-    )
-    WHERE SEQNUM = 1;
+FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR CCDVAH
+WHERE CCDVAH.NODE = (SELECT  CASE
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX > MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_SENDBYTES.NODE
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX < MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_RECEIVEBYTES.NODE
+                              ELSE  MAX_SENDBYTES.NODE
+                            END NODE
+                    FROM  MAX_SENDBYTES,
+                          MAX_RECEIVEBYTES)
+AND CCDVAH.FECHA = (SELECT  CASE
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX > MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_SENDBYTES.FECHA
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX < MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_RECEIVEBYTES.FECHA
+                              ELSE  MAX_SENDBYTES.FECHA
+                            END FECHA
+                    FROM  MAX_SENDBYTES,
+                          MAX_RECEIVEBYTES);
 
 
 
 -- HOUR
-INSERT INTO csco_cpu_mem_device_avg_hour
-select  cpu.FECHA,
-        cpu.NODE,
-        cpu.CPUUTILMAX5MINDEVICEAVG,
-        cpu.CPUUTILAVG5MINDEVICEAVG,
-        cpu.CPUUTILMAX1MINDEVICEAVG,
-        cpu.CPUUTILAVG1MINDEVICEAVG,
-        mem.USEDBYTESDEVICEAVG,
-        mem.FREEBYTESDEVICEAVG,
-        mem.AVGUTILDEVICEAVG,
-        mem.MAXUTILDEVICEAVG
-from  csco_cpu_device_avg_hour cpu,
-      csco_memory_device_avg_hour mem
-where cpu.fecha = mem.fecha
-and cpu.node = mem.node
-and cpu.node = 'TOR-LAN-S05';
+INSERT INTO CSCO_CPU_MEM_DEVICE_AVG_HOUR
+SELECT  CPU.FECHA,
+        CPU.NODE,
+        CPU.CPUUTILMAX5MINDEVICEAVG,
+        CPU.CPUUTILAVG5MINDEVICEAVG,
+        CPU.CPUUTILMAX1MINDEVICEAVG,
+        CPU.CPUUTILAVG1MINDEVICEAVG,
+        MEM.USEDBYTESDEVICEAVG,
+        MEM.FREEBYTESDEVICEAVG,
+        MEM.AVGUTILDEVICEAVG,
+        MEM.MAXUTILDEVICEAVG
+FROM  CSCO_CPU_DEVICE_AVG_HOUR CPU,
+      CSCO_MEMORY_DEVICE_AVG_HOUR MEM
+WHERE CPU.FECHA = MEM.FECHA (+)
+AND CPU.NODE = MEM.NODE (+)
+AND TO_CHAR(CPU.FECHA,'dd.mm.yyyy') = '28.07.2016';
+--and cpu.node = 'TOR-LAN-S05';
 
 
 
@@ -57,7 +82,7 @@ and cpu.node = 'TOR-LAN-S05';
 -- DAY
 --
 --insert into csco_cpu_mem_device_avg_day
-select  FECHA,
+SELECT  TO_CHAR(FECHA,'dd.mm.yyyy') FECHA,
         NODE,
         ROUND(AVG(CPUUTILMAX5MINDEVICEAVG),2) CPUUTILMAX5MINDEVICEAVG,
         ROUND(AVG(CPUUTILAVG5MINDEVICEAVG),2) CPUUTILAVG5MINDEVICEAVG,
@@ -67,10 +92,6 @@ select  FECHA,
         ROUND(AVG(FREEBYTESDEVICEAVG),2)      FREEBYTESDEVICEAVG,
         ROUND(AVG(AVGUTILDEVICEAVG),2)        AVGUTILDEVICEAVG,
         ROUND(AVG(MAXUTILDEVICEAVG),2)        MAXUTILDEVICEAVG
-from  csco_cpu_mem_device_avg_hour
---where node = 'AMB037-AGG-03'
-group by fecha,node
-order by fecha;
-
-
-
+FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR
+WHERE TO_CHAR(FECHA,'dd.mm.yyyy') = '02.08.2016'
+GROUP BY TO_CHAR(FECHA,'dd.mm.yyyy'),NODE;
