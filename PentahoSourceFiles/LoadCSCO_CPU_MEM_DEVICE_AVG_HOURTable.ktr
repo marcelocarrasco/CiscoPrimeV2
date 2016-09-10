@@ -93,12 +93,12 @@
   <notepads>
     <notepad>
       <note>Se generan los datos para insertar en la tabla CSCO_CPU_MEM_DEVICE_AVG_HOUR&#xa;utilizando los datos de las tablas CSCO_CPU_DEVICE_AVG_HOUR &#xa;CSCO_MEMORY_DEVICE_AVG_HOUR de acuerdo a los requerimientos</note>
-      <xloc>432</xloc>
-      <yloc>32</yloc>
-      <width>509</width>
-      <heigth>55</heigth>
+      <xloc>144</xloc>
+      <yloc>16</yloc>
+      <width>411</width>
+      <heigth>46</heigth>
       <fontname>Sans</fontname>
-      <fontsize>9</fontsize>
+      <fontsize>7</fontsize>
       <fontbold>N</fontbold>
       <fontitalic>N</fontitalic>
       <fontcolorred>0</fontcolorred>
