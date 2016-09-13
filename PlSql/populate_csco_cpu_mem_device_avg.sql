@@ -1,4 +1,9 @@
+--
+-- IBHW
+--
+/*
 
+*/
 -- BH
 --
 INSERT INTO CSCO_CPU_MEM_DEVICE_AVG_BH (FECHA,NODE,CPUUTILMAX5MINDEVICEAVG,CPUUTILAVG5MINDEVICEAVG,CPUUTILMAX1MINDEVICEAVG,
@@ -71,7 +76,58 @@ WHERE (CCDVAH.NODE,CCDVAH.FECHA) = (('C1900-PD-02','23.08.2016 22:00:00'));,
 ('CO008-P-01','23.08.2016 20:00:00'),
 ('C1900-BR-03','23.08.2016 22:00:00'),
 ('ngry01rt33','23.08.2016 21:00:00'));	
-
+--
+WITH  SENDBYTES AS  (SELECT /*+ MATERIALIZE */
+                            FECHA,
+                            NODE,
+                            MAX(SENDBYTES) AS SENDBYTES_MAX
+                    FROM CSCO_INTERFACE_HOUR
+                    WHERE TO_CHAR(FECHA,'DD.MM.YYYY') = '02.08.2016'
+                    GROUP BY FECHA,NODE
+                    ORDER BY SENDBYTES_MAX DESC),
+      RECEIVEBYTES AS (SELECT /*+ MATERIALIZE */
+                              FECHA,
+                              NODE,
+                              MAX(RECEIVEBYTES) AS RECEIVEBYTES_MAX
+                      FROM CSCO_INTERFACE_HOUR
+                      WHERE TO_CHAR(FECHA,'DD.MM.YYYY') = '02.08.2016'
+                      GROUP BY FECHA,NODE
+                      ORDER BY  RECEIVEBYTES_MAX DESC),
+      MAX_SENDBYTES AS  (SELECT FECHA,
+                                NODE,
+                                SENDBYTES_MAX
+                        FROM  SENDBYTES
+                        WHERE ROWNUM = 1),
+      MAX_RECEIVEBYTES  AS  (SELECT FECHA,
+                                    NODE,
+                                    RECEIVEBYTES_MAX
+                            FROM  RECEIVEBYTES
+                            WHERE ROWNUM = 1)
+SELECT  FECHA,
+        CCDVAH.NODE NODE,
+        CPUUTILMAX5MINDEVICEAVG,
+        CPUUTILAVG5MINDEVICEAVG,
+        CPUUTILMAX1MINDEVICEAVG,
+        CPUUTILAVG1MINDEVICEAVG,
+        USEDBYTESDEVICEAVG,
+        FREEBYTESDEVICEAVG,
+        AVGUTILDEVICEAVG,
+        MAXUTILDEVICEAVG
+FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR CCDVAH
+WHERE CCDVAH.NODE = (SELECT  CASE
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX > MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_SENDBYTES.NODE
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX < MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_RECEIVEBYTES.NODE
+                              ELSE  MAX_SENDBYTES.NODE
+                            END NODE
+                    FROM  MAX_SENDBYTES,
+                          MAX_RECEIVEBYTES)
+AND CCDVAH.FECHA = (SELECT  CASE
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX > MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_SENDBYTES.FECHA
+                              WHEN  MAX_SENDBYTES.SENDBYTES_MAX < MAX_RECEIVEBYTES.RECEIVEBYTES_MAX  THEN  MAX_RECEIVEBYTES.FECHA
+                              ELSE  MAX_SENDBYTES.FECHA
+                            END FECHA
+                    FROM  MAX_SENDBYTES,
+                          MAX_RECEIVEBYTES)
 --
 -- OPCION 2
 --
