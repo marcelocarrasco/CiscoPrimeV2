@@ -12,6 +12,8 @@
     <parameters>
     </parameters>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
 <job-log-table><connection/>
 <schema/>
@@ -63,8 +65,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>16</yloc>
+      <xloc>400</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
       <name>Get Local CGN_STATS File Count</name>
@@ -96,8 +98,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>16</yloc>
+      <xloc>656</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
       <name>START</name>
@@ -127,8 +129,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>912</xloc>
-      <yloc>176</yloc>
+      <xloc>928</xloc>
+      <yloc>208</yloc>
       </entry>
     <entry>
       <name>Evaluate CGN_STATS File Count</name>
@@ -149,8 +151,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>912</xloc>
-      <yloc>16</yloc>
+      <xloc>928</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -159,8 +161,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>784</xloc>
-      <yloc>384</yloc>
+      <xloc>800</xloc>
+      <yloc>416</yloc>
       </entry>
     <entry>
       <name>Unzip CGN_STATS Copied Files</name>
@@ -190,8 +192,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>144</yloc>
+      <xloc>688</xloc>
+      <yloc>176</yloc>
       </entry>
     <entry>
       <name>Abort job by Unzip</name>
@@ -201,8 +203,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>272</yloc>
+      <xloc>688</xloc>
+      <yloc>304</yloc>
       </entry>
     <entry>
       <name>Populate Files Table</name>
@@ -232,8 +234,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>144</yloc>
+      <xloc>320</xloc>
+      <yloc>176</yloc>
       </entry>
     <entry>
       <name>Abort job by Populate Files Table</name>
@@ -243,8 +245,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>112</xloc>
-      <yloc>144</yloc>
+      <xloc>128</xloc>
+      <yloc>176</yloc>
       </entry>
     <entry>
       <name>Load CGN_STATS Into Table HOUR</name>
@@ -274,8 +276,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>272</yloc>
+      <xloc>320</xloc>
+      <yloc>304</yloc>
       </entry>
     <entry>
       <name>Abort CGN_STATS Hourjob</name>
@@ -285,8 +287,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>80</xloc>
-      <yloc>272</yloc>
+      <xloc>96</xloc>
+      <yloc>304</yloc>
       </entry>
     <entry>
       <name>Zip CGN_STATS processed files</name>
@@ -313,8 +315,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
-      <yloc>384</yloc>
+      <xloc>576</xloc>
+      <yloc>416</yloc>
       </entry>
     <entry>
       <name>Check Files Table</name>
@@ -344,8 +346,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>304</xloc>
-      <yloc>384</yloc>
+      <xloc>320</xloc>
+      <yloc>416</yloc>
       </entry>
     <entry>
       <name>Set Environment</name>
@@ -377,8 +379,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>16</yloc>
+      <xloc>176</xloc>
+      <yloc>48</yloc>
       </entry>
   </entries>
   <hops>

@@ -63,6 +63,7 @@
     </partitionschemas>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
         <clusterschema>
@@ -275,7 +276,7 @@
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;CISCO-LOG-PATH&#x7d;&#x2f;rwk_cpu_device_avg_hour</name>
+      <name>&#x24;&#x7b;CISCO-LOG-PATH&#x7d;&#x2f;rwk_cpu_device_avg_hour_&#x24;&#x7b;FECHA_PROC&#x7d;</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -283,7 +284,7 @@
       <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
-      <add_date>Y</add_date>
+      <add_date>N</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format>ddMMyyyyHHmmss</date_time_format>

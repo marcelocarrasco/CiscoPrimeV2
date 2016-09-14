@@ -62,8 +62,20 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
+        <clusterschema>
+          <name>localhost_cluster</name>
+          <base_port>8085</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+          </slaveservers>
+        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;05&#x2f;02 16&#x3a;59&#x3a;52.332</created_date>
@@ -133,11 +145,11 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;CPU_DEVICE_AVG.&#x25;&#x27;&#xa;order by 1</sql>
+    <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;CPU_DEVICE_AVG.&#x24;&#x7b;FECHA_PROC&#x7d;&#x25;&#x27;&#xa;order by 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>Y</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>

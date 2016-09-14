@@ -84,4 +84,40 @@ WHERE ROWID IN (SELECT RID
                       FROM CSCO_CGN_STATS_HOUR
                       WHERE TRUNC(FECHA) = '21.08.2016')
                 WHERE RN > 1
-               );                  
+               );
+--**********************************************************--
+-- Elimina duplicados de la tabla CSCO_CPU_DEVICE_AVG_HOUR
+--**********************************************************--
+DELETE 
+--select *
+FROM CSCO_CPU_DEVICE_AVG_HOUR
+WHERE ROWID IN (SELECT RID 
+                FROM (SELECT  ROWID RID,
+                              FECHA,
+                              NODE,
+                              ROW_NUMBER() OVER(PARTITION BY  FECHA,
+                                                              NODE 
+                                                ORDER BY  FECHA,
+                                                          NODE) RN
+                      FROM CSCO_CPU_DEVICE_AVG_HOUR)
+                      --WHERE TRUNC(FECHA) = '21.08.2016')
+                WHERE RN > 1
+               );
+--**********************************************************--
+-- Elimina duplicados de la tabla CSCO_MEMORY_DEVICE_AVG_HOUR
+--**********************************************************--
+DELETE 
+--select *
+FROM CSCO_MEMORY_DEVICE_AVG_HOUR
+WHERE ROWID IN (SELECT RID 
+                FROM (SELECT  ROWID RID,
+                              FECHA,
+                              NODE,
+                              ROW_NUMBER() OVER(PARTITION BY  FECHA,
+                                                              NODE 
+                                                ORDER BY  FECHA,
+                                                          NODE) RN
+                      FROM CSCO_MEMORY_DEVICE_AVG_HOUR)
+                      --WHERE TRUNC(FECHA) = '21.08.2016')
+                WHERE RN > 1
+               );
