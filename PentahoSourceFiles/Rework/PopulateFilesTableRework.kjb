@@ -14,6 +14,7 @@
     </parameters>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
 <job-log-table><connection/>
 <schema/>
@@ -52,16 +53,16 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
+      <xloc>96</xloc>
       <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Get CSV File Names For Table FILES</name>
+      <name>Get MEMORY_DEVICE_AVG CSV File Names For Table FILES</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;GetCSVFileNamesForFILESTableRework.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;GetMDACSVFileNamesForFILESTableRework.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -135,7 +136,7 @@
   <hops>
     <hop>
       <from>START</from>
-      <to>Get CSV File Names For Table FILES</to>
+      <to>Get MEMORY_DEVICE_AVG CSV File Names For Table FILES</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -143,7 +144,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Get CSV File Names For Table FILES</from>
+      <from>Get MEMORY_DEVICE_AVG CSV File Names For Table FILES</from>
       <to>Populate Files Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

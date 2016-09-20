@@ -13,6 +13,8 @@
     <parameters>
     </parameters>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
 <job-log-table><connection/>
 <schema/>
@@ -54,7 +56,7 @@
       <rootzip>N</rootzip>
       <createfolder>N</createfolder>
       <nr_limit>10</nr_limit>
-      <wildcardSource>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface_errors&#x5c;.&#x7c;INTERFACE_ERRORS&#x5c;.&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</wildcardSource>
+      <wildcardSource>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface_errors&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x7c;INTERFACE_ERRORS&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</wildcardSource>
       <success_condition>success_if_no_errors</success_condition>
       <iffileexists>OVERWRITE</iffileexists>
       <create_move_to_directory>N</create_move_to_directory>
@@ -84,7 +86,7 @@
       <fields>
         <field>
           <name>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly</name>
-          <filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface_errors&#x5c;.&#x7c;INTERFACE_ERRORS&#x5c;.&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</filemask>
+          <filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface_errors&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x7c;INTERFACE_ERRORS&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.zip</filemask>
         </field>
       </fields>
       <parallel>N</parallel>

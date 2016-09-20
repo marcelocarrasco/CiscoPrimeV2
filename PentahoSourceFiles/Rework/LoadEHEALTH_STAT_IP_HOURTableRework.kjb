@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>INTERFACE_Rework</name>
+  <name>LoadEHEALTH_STAT_IP_HOURTableRework</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;19 15&#x3a;29&#x3a;29.096</created_date>
+  <created_date>2016&#x2f;09&#x2f;05 12&#x3a;14&#x3a;44.824</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;19 15&#x3a;29&#x3a;29.096</modified_date>
+  <modified_date>2016&#x2f;09&#x2f;05 12&#x3a;14&#x3a;44.824</modified_date>
     <parameters>
         <parameter>
             <name>FECHA_PROC</name>
@@ -58,206 +58,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>16</xloc>
-      <yloc>32</yloc>
+      <xloc>96</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>272</yloc>
-      </entry>
-    <entry>
-      <name>Unzip INTERFACE Copied Files Rework</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;UnzipINTERFACEFilesRework.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>32</yloc>
-      </entry>
-    <entry>
-      <name>Abort job by Unzip</name>
-      <description/>
-      <type>ABORT</type>
-      <message>Job aborted due to an UNZIP error</message>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>384</xloc>
-      <yloc>160</yloc>
-      </entry>
-    <entry>
-      <name>Populate Files Table Rework</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateFilesTableRework.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>656</xloc>
-      <yloc>32</yloc>
-      </entry>
-    <entry>
-      <name>Abort job by Populate Files Table</name>
-      <description/>
-      <type>ABORT</type>
-      <message>Something went wrong with population job</message>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>912</xloc>
-      <yloc>32</yloc>
-      </entry>
-    <entry>
-      <name>Load INTERFACE Into Table HOUR Rework</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadINTERFACEIntoTableHOURRework.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>656</xloc>
-      <yloc>144</yloc>
-      </entry>
-    <entry>
-      <name>Abort INTERFACE Hour job</name>
-      <description/>
-      <type>ABORT</type>
-      <message>Check logs due to errors</message>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>912</xloc>
-      <yloc>144</yloc>
-      </entry>
-    <entry>
-      <name>Check Files Table Rework</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;CheckFilesTableRework.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>656</xloc>
-      <yloc>272</yloc>
-      </entry>
-    <entry>
-      <name>Zip INTERFACE processed files</name>
-      <description/>
-      <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;rwk_interface_&#x24;&#x7b;FECHA_PROC&#x7d;.zip</zipfilename>
-      <compressionrate>2</compressionrate>
-      <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;interface&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x7c;INTERFACE&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
-      <wildcardexclude/>
-      <sourcedirectory>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;</sourcedirectory>
-      <movetodirectory/>
-      <afterzip>1</afterzip>
-      <addfiletoresult>N</addfiletoresult>
-      <isfromprevious>N</isfromprevious>
-      <createparentfolder>N</createparentfolder>
-      <adddate>N</adddate>
-      <addtime>N</addtime>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <createMoveToDirectory>N</createMoveToDirectory>
-      <include_subfolders>N</include_subfolders>
-      <stored_source_path_depth>1</stored_source_path_depth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>272</yloc>
-      </entry>
-    <entry>
-      <name>Set Environment Rework</name>
+      <name>Set EnvironmentRework</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -286,86 +91,101 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>160</xloc>
-      <yloc>32</yloc>
+      <xloc>240</xloc>
+      <yloc>48</yloc>
+      </entry>
+    <entry>
+      <name>Load EHEALTH_STAT_IP_HOUR Table Rework</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadEHEALTH_STAT_IP_HOURTableRework.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>Y</set_logfile>
+      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;rwk_load_ehealth_stat_ip_hour_&#x24;&#x7b;FECHA_PROC&#x7d;</logfile>
+      <logext>log</logext>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Error</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>480</xloc>
+      <yloc>48</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>944</xloc>
+      <yloc>144</yloc>
+      </entry>
+    <entry>
+      <name>Abort EHEALTH_STAT_IP_HOUR job</name>
+      <description/>
+      <type>ABORT</type>
+      <message>Check logs due to errors</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>480</xloc>
+      <yloc>192</yloc>
+      </entry>
+    <entry>
+      <name>Calcular Sumarizaciones EHEALTH Rework</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;CalcularSumarizacionesEHEALTHRework.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>720</xloc>
+      <yloc>144</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
-      <from>Populate Files Table Rework</from>
-      <to>Load INTERFACE Into Table HOUR Rework</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Populate Files Table Rework</from>
-      <to>Abort job by Populate Files Table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Load INTERFACE Into Table HOUR Rework</from>
-      <to>Abort INTERFACE Hour job</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Unzip INTERFACE Copied Files Rework</from>
-      <to>Populate Files Table Rework</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Unzip INTERFACE Copied Files Rework</from>
-      <to>Abort job by Unzip</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Load INTERFACE Into Table HOUR Rework</from>
-      <to>Check Files Table Rework</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Check Files Table Rework</from>
-      <to>Zip INTERFACE processed files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Zip INTERFACE processed files</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
-      <to>Set Environment Rework</to>
+      <to>Set EnvironmentRework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -373,8 +193,35 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Set Environment Rework</from>
-      <to>Unzip INTERFACE Copied Files Rework</to>
+      <from>Set EnvironmentRework</from>
+      <to>Load EHEALTH_STAT_IP_HOUR Table Rework</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Load EHEALTH_STAT_IP_HOUR Table Rework</from>
+      <to>Abort EHEALTH_STAT_IP_HOUR job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Load EHEALTH_STAT_IP_HOUR Table Rework</from>
+      <to>Calcular Sumarizaciones EHEALTH Rework</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Calcular Sumarizaciones EHEALTH Rework</from>
+      <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

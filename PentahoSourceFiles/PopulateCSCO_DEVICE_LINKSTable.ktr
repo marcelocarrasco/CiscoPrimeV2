@@ -187,7 +187,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>SELECT&#xa;  AENDPOINT&#xa;, CASE&#xa;    WHEN REGEXP_LIKE&#x28;PORTNUMBERA,&#x27;&#x5e;TenGigE&#x5b;0-9&#x5d;&#x27;&#x29; THEN &#xa;        REPLACE&#x28;REGEXP_REPLACE&#x28;PORTNUMBERA,&#x27;TenGigE&#x27;,&#x27;TenGigabitEthernet&#x27;&#x29;,&#x27;-&#x27;,&#x27;&#x2f;&#x27;&#x29;&#xa;    ELSE PORTNUMBERA&#xa;  END PORTNUMBERA&#xa;, LINKTYPE&#xa;, ZENDPOINT&#xa;, PORTNUMBERZ&#xa;, ROWNUMBER&#xa;FROM CSCO_DEVICE_LINKS_AUX&#xa;WHERE AENDPOINT IS NOT NULL&#xa;AND	  PORTNUMBERA IS NOT NULL&#xa;AND	  LINKTYPE IS NOT NULL&#xa;AND	  ZENDPOINT IS NOT NULL&#xa;AND	  PORTNUMBERZ IS NOT NULL&#xa;ORDER BY ROWNUMBER</sql>
+    <sql>SELECT&#xa;  AENDPOINT&#xa;--, CASE&#xa;--    WHEN REGEXP_LIKE&#x28;PORTNUMBERA,&#x27;&#x5e;TenGigE&#x5b;0-9&#x5d;&#x27;&#x29; THEN &#xa;--        REPLACE&#x28;REGEXP_REPLACE&#x28;PORTNUMBERA,&#x27;TenGigE&#x27;,&#x27;TenGigabitEthernet&#x27;&#x29;,&#x27;-&#x27;,&#x27;&#x2f;&#x27;&#x29;&#xa;--    ELSE PORTNUMBERA&#xa;--  END PORTNUMBERA&#xa;, PORTNUMBERA&#xa;, LINKTYPE&#xa;, ZENDPOINT&#xa;, PORTNUMBERZ&#xa;, ROWNUMBER&#xa;FROM CSCO_DEVICE_LINKS_AUX&#xa;WHERE AENDPOINT IS NOT NULL&#xa;AND	  PORTNUMBERA IS NOT NULL&#xa;AND	  LINKTYPE IS NOT NULL&#xa;AND	  ZENDPOINT IS NOT NULL&#xa;AND	  PORTNUMBERZ IS NOT NULL&#xa;ORDER BY ROWNUMBER</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

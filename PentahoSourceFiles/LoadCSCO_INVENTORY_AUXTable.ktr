@@ -63,8 +63,20 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
+        <clusterschema>
+          <name>localhost_cluster</name>
+          <base_port>8085</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+          </slaveservers>
+        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;08&#x2f;09 14&#x3a;48&#x3a;48.003</created_date>
@@ -100,10 +112,10 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>ANA_BQL_NEs_Netcracker_Preliminar_PHYSICAL_IP.csv</from><to>CSCO_INVENTORY_AUX</to><enabled>Y</enabled> </hop>
+  <hop> <from>ANA_BQL_NEs_Netcracker_Preliminar_PHYSICAL_IP_COMMA.csv</from><to>CSCO_INVENTORY_AUX</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>ANA_BQL_NEs_Netcracker_Preliminar_PHYSICAL_IP.csv</name>
+    <name>ANA_BQL_NEs_Netcracker_Preliminar_PHYSICAL_IP_COMMA.csv</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>

@@ -11,9 +11,15 @@
   <modified_user>-</modified_user>
   <modified_date>2016&#x2f;07&#x2f;22 16&#x3a;07&#x3a;40.435</modified_date>
     <parameters>
+        <parameter>
+            <name>FECHA_PROC</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
 <job-log-table><connection/>
 <schema/>
@@ -195,10 +201,10 @@
       <name>Zip MEMORY_DEVICE_AVERAGE processed files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;rwk_memory_device_average.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;rwk_memory_device_average_&#x24;&#x7b;FECHA_PROC&#x7d;.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;memory_device_average&#x7c;MEMORY_DEVICE_AVERAGE&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
+      <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;memory_device_average&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x7c;MEMORY_DEVICE_AVERAGE&#x5c;.&#x24;&#x7b;FECHA_PROC&#x7d;&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
       <wildcardexclude/>
       <sourcedirectory>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;</sourcedirectory>
       <movetodirectory/>
@@ -206,7 +212,7 @@
       <addfiletoresult>N</addfiletoresult>
       <isfromprevious>N</isfromprevious>
       <createparentfolder>N</createparentfolder>
-      <adddate>Y</adddate>
+      <adddate>N</adddate>
       <addtime>N</addtime>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>

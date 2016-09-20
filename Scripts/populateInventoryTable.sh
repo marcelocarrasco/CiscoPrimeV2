@@ -1,10 +1,14 @@
 #!/bin/bash
-
+<<COMMENT
+Se utiliza para llenar la tabla INVENTORY que contiene datos de los equipos CISCO
+Este script es llamado desde Pentaho, recibe como parametros:
+DB-USER, DB-NOENC-PASS, DB-NAME
+COMMENT
 #export ORACLE_HOME=/oracle/app/oracle/product/12.1.0.2/dbhome
 #export ORACLE_SID=DSMART2
 #export ORAENV_ASK=NO
 
-sqlplus  $1/$2@DSMART2 << EOF 
+sqlplus  $1/$2@$3 << EOF 
 declare
   cursor indx is
   select  rownumber,

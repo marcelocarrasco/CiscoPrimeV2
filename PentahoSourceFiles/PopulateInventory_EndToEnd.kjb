@@ -14,6 +14,7 @@
     </parameters>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
 <job-log-table><connection/>
 <schema/>
@@ -52,7 +53,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
+      <xloc>64</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -85,7 +86,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
+      <xloc>176</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -128,7 +129,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>768</xloc>
+      <xloc>800</xloc>
       <yloc>160</yloc>
       </entry>
     <entry>
@@ -186,6 +187,29 @@
       <xloc>528</xloc>
       <yloc>288</yloc>
       </entry>
+    <entry>
+      <name>makeKVP Shell</name>
+      <description/>
+      <type>SHELL</type>
+      <filename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;Scripts&#x2f;makeKVP.sh</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>Y</set_logfile>
+      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;makeKVP_outpt</logfile>
+      <set_append_logfile>N</set_append_logfile>
+      <logext>log</logext>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>&#x3e; &#x24;&#x7b;CSCO-INVENTORY-OUTPUT&#x7d;&#xa;sed -n &#x27;&#x2f;CommunicationStateEnum&#x2f;,&#x2f;InvestigationStateEnum&#x2f;&#x7b;p&#x7d;&#x27; &#x24;&#x7b;CSCO-INVENTORY-INPUT&#x7d; &#x3e; &#x24;&#x7b;CSCO-INVENTORY-OUTPUT&#x7d;</script>
+      <loglevel>Error</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>176</xloc>
+      <yloc>176</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -196,15 +220,6 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Set Environment</from>
-      <to>Load CSCO_INVENTORY_AUX Table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Load CSCO_INVENTORY_AUX Table</from>
@@ -240,6 +255,24 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set Environment</from>
+      <to>makeKVP Shell</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>makeKVP Shell</from>
+      <to>Load CSCO_INVENTORY_AUX Table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

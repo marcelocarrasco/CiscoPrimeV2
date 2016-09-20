@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>GetINTERFACE_ERRORSFileNamesFromDBRework</name>
+    <name>LoadCSCO_CPU_MEM_DEVICE_AVG_HOURTable</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,6 +9,11 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>FECHA_PROC</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -79,13 +84,34 @@
         </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;04&#x2f;29 10&#x3a;55&#x3a;26.727</created_date>
+  <created_date>2016&#x2f;09&#x2f;07 10&#x3a;57&#x3a;48.779</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;04&#x2f;29 10&#x3a;55&#x3a;26.727</modified_date>
+  <modified_date>2016&#x2f;09&#x2f;07 10&#x3a;57&#x3a;48.779</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>Se generan los datos para insertar en la tabla CSCO_CPU_MEM_DEVICE_AVG_HOUR&#xa;utilizando los datos de las tablas CSCO_CPU_DEVICE_AVG_HOUR &#xa;CSCO_MEMORY_DEVICE_AVG_HOUR de acuerdo a los requerimientos</note>
+      <xloc>144</xloc>
+      <yloc>16</yloc>
+      <width>411</width>
+      <heigth>46</heigth>
+      <fontname>Sans</fontname>
+      <fontsize>7</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>falda.claro.amx</name>
@@ -106,36 +132,17 @@
       <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;DB-PORT&#x7d;</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SQL_CONNECT</code><attribute>&#x24;&#x7b;DB-NLS-DATE-FORMAT&#x7d;</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
   <order>
-  <hop> <from>Get INTERFACE_ERRORS File Names From DB</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table CSCO_CPU_DEVICE_AVG_HOUR &#x26; CSCO_MEMORY_DEVICE_AVG_HOUR input</from><to>Table CSCO_CPU_MEM_DEVICE_AVG_HOUR output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Copy rows to result</name>
-    <type>RowsToResult</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get INTERFACE_ERRORS File Names From DB</name>
+    <name>Table CSCO_CPU_DEVICE_AVG_HOUR &#x26; CSCO_MEMORY_DEVICE_AVG_HOUR input</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -146,7 +153,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>select nombre_csv&#xa;from files&#xa;where  status &#x3d; 5 &#xa;and nombre_csv like &#x27;&#x25;INTERFACE_ERRORS.&#x24;&#x7b;FECHA_PROC&#x7d;&#x25;&#x27;&#xa;order by 1</sql>
+    <sql>WITH  OBJETOS_EHEALTH AS  &#x28;SELECT &#x2f;&#x2a;&#x2b; MATERIALIZE &#x2a;&#x2f;&#xa;                                      ELEMENT_NAME&#xa;                              FROM  EHEALTH_OBJECTS_AUX&#xa;                              WHERE FLAG_ENABLED &#x3d; &#x27;S&#x27;&#xa;                              AND GRUPO &#x21;&#x3d; &#x27;IPRAN&#x27;&#xa;                              GROUP BY ELEMENT_NAME&#x29;,&#xa;      CPU_MEM_DEVICE_AVG_DATA AS &#x28;SELECT  CPU.FECHA,&#xa;                                          CPU.NODE,&#xa;                                          CPU.CPUUTILMAX5MINDEVICEAVG,&#xa;                                          CPU.CPUUTILAVG5MINDEVICEAVG,&#xa;                                          CPU.CPUUTILMAX1MINDEVICEAVG,&#xa;                                          CPU.CPUUTILAVG1MINDEVICEAVG,&#xa;                                          MEM.USEDBYTESDEVICEAVG,&#xa;                                          MEM.FREEBYTESDEVICEAVG,&#xa;                                          MEM.AVGUTILDEVICEAVG,&#xa;                                          MEM.MAXUTILDEVICEAVG&#xa;                                  FROM  CSCO_CPU_DEVICE_AVG_HOUR CPU,&#xa;                                        CSCO_MEMORY_DEVICE_AVG_HOUR MEM&#xa;                                  WHERE CPU.FECHA &#x3d; MEM.FECHA&#xa;                                  AND CPU.NODE &#x3d; MEM.NODE&#x29;&#xa;SELECT  FECHA,&#xa;        NODE,&#xa;        CPUUTILMAX5MINDEVICEAVG,&#xa;        CPUUTILAVG5MINDEVICEAVG,&#xa;        CPUUTILMAX1MINDEVICEAVG,&#xa;        CPUUTILAVG1MINDEVICEAVG,&#xa;        USEDBYTESDEVICEAVG,&#xa;        FREEBYTESDEVICEAVG,&#xa;        AVGUTILDEVICEAVG,&#xa;        MAXUTILDEVICEAVG&#xa;FROM  OBJETOS_EHEALTH,&#xa;      CPU_MEM_DEVICE_AVG_DATA&#xa;WHERE ELEMENT_NAME &#x3d; NODE&#xa;AND TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29; &#x3d; 	&#x28;SELECT  DIA&#x7c;&#x7c;&#x27;.&#x27;&#x7c;&#x7c;MES&#x7c;&#x7c;&#x27;.&#x27;&#x7c;&#x7c;ANIO&#xa;									FROM  &#x28;SELECT SUBSTR&#x28;&#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;,1,4&#x29;   ANIO,&#xa;									              SUBSTR&#x28;&#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;,6,2&#x29;   MES,&#xa;									              SUBSTR&#x28;&#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;,-2,2&#x29;  DIA&#xa;									      FROM DUAL&#x29;&#x29;--TO_CHAR&#x28;&#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;,&#x27;DD.MM.YYYY&#x27;&#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -154,15 +161,15 @@
     <lazy_conversion_active>Y</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
-      <yloc>112</yloc>
+      <xloc>272</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
+    <name>Table CSCO_CPU_MEM_DEVICE_AVG_HOUR output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -171,22 +178,86 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage/>
+    <connection>falda.claro.amx</connection>
+    <schema/>
+    <table>CSCO_CPU_MEM_DEVICE_AVG_HOUR</table>
+    <commit>10000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
-      </fields>
+        <field>
+          <column_name>FECHA</column_name>
+          <stream_name>FECHA</stream_name>
+        </field>
+        <field>
+          <column_name>NODE</column_name>
+          <stream_name>NODE</stream_name>
+        </field>
+        <field>
+          <column_name>CPUUTILMAX5MINDEVICEAVG</column_name>
+          <stream_name>CPUUTILMAX5MINDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>CPUUTILAVG5MINDEVICEAVG</column_name>
+          <stream_name>CPUUTILAVG5MINDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>CPUUTILMAX1MINDEVICEAVG</column_name>
+          <stream_name>CPUUTILMAX1MINDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>CPUUTILAVG1MINDEVICEAVG</column_name>
+          <stream_name>CPUUTILAVG1MINDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>USEDBYTESDEVICEAVG</column_name>
+          <stream_name>USEDBYTESDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>FREEBYTESDEVICEAVG</column_name>
+          <stream_name>FREEBYTESDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>AVGUTILDEVICEAVG</column_name>
+          <stream_name>AVGUTILDEVICEAVG</stream_name>
+        </field>
+        <field>
+          <column_name>MAXUTILDEVICEAVG</column_name>
+          <stream_name>MAXUTILDEVICEAVG</stream_name>
+        </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>112</yloc>
+      <xloc>496</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
+      <error>
+        <source_step>Table CSCO_CPU_MEM_DEVICE_AVG_HOUR output</source_step>
+        <target_step/>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename>nroErrFieldname</nr_valuename>
+        <descriptions_valuename>errDescriptions</descriptions_valuename>
+        <fields_valuename>errField</fields_valuename>
+        <codes_valuename>errCode</codes_valuename>
+        <max_errors/>
+        <max_pct_errors/>
+        <min_pct_rows/>
+      </error>
   </step_error_handling>
    <slave-step-copy-partition-distribution>
 </slave-step-copy-partition-distribution>

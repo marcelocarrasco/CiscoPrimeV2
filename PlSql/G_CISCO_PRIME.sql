@@ -30,6 +30,9 @@ CREATE OR REPLACE PACKAGE G_CISCO_PRIME AS
   * Procedure: P_CGN_STATS_DAY_INS, calcula la sumarización de los contadores a nivel de día.
   * Param: P_FECHA_DESDE, P_FECHA_HASTA, rango de fechas para hacer la sumarización.
   */
+  --******************************************************--
+  --                        CGN_STATS                     --
+  --******************************************************--
   PROCEDURE P_CGN_STATS_DAY_INS(p_fecha_desde in varchar2, p_fecha_hasta in varchar2);
   
   /**
@@ -61,19 +64,30 @@ CREATE OR REPLACE PACKAGE G_CISCO_PRIME AS
   /**
   *
   */
-   PROCEDURE P_CSCO_CPU_MEM_DEVICE_AVG_IBHW(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
+  PROCEDURE P_CSCO_CPU_MEM_DEVICE_AVG_IBHW(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
+  /**
+  *
+  */
+  PROCEDURE P_CALC_SUM_CPU_MEM_DEVICE_AVG(P_FECHA IN VARCHAR2);
   --******************************************************--
   --                EHEALTH_STAT_IP                       --
   --******************************************************--
- /**
- *
- */
- PROCEDURE P_EHEALTH_STAT_IP_BH(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
- /**
- *
- */
-PROCEDURE P_EHEALTH_STAT_IP_DAY(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
- 
+  /**
+  *
+  */
+  PROCEDURE P_EHEALTH_STAT_IP_BH(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
+  /**
+  *
+  */
+  PROCEDURE P_EHEALTH_STAT_IP_IBHW(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
+  /**
+  *
+  */
+  PROCEDURE P_EHEALTH_STAT_IP_DAY(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2);
+  /**
+  *
+  */
+  PROCEDURE P_CALC_SUM_EHEALTH_STAT_IP(P_FECHA IN VARCHAR2);
 END G_CISCO_PRIME;
 /
 
@@ -213,8 +227,8 @@ END P_INVENTORY_INS;
             round(nvl(AVG(csr.ADDRESSUSED),0),2)             ADDRESSUSED,
             round(nvl(AVG(csr.NUMBEROFSUBSCRIBERS),0),2)     NUMBEROFSUBSCRIBERS   
     FROM csco_CGN_STATS_HOUR csr
-    WHERE trunc(csr.FECHA) BETWEEN TO_DATE(FECHA_DESDE,'dd.mm.yyyy')
-    AND TO_DATE(FECHA_HASTA,'dd.mm.yyyy')
+    WHERE trunc(csr.FECHA) BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+    AND TO_DATE(FECHA_HASTA,'DD.MM.YYYY')
     GROUP BY trunc(csr.FECHA), csr.node, csr.cgninstanceid
     ORDER BY FECHA, nodo,cgninstanceid;
   --
@@ -287,7 +301,7 @@ END P_INVENTORY_INS;
         ADDRESSUSED,
         NUMBEROFSUBSCRIBERS
     FROM (
-          SELECT to_char(fecha,'dd.mm.yyyy HH24') FECHA,
+          SELECT to_char(fecha,'DD.MM.YYYY HH24') FECHA,
                  node,
                  CGNINSTANCEID,
                  ACTIVETRANSLATIONS ,
@@ -308,9 +322,9 @@ END P_INVENTORY_INS;
                                         ORDER BY (ACTIVETRANSLATIONS) DESC,
                                                  trunc(fecha) DESC NULLS LAST) SEQNUM
           FROM CSCO_CGN_STATS_HOUR
-          WHERE trunc(fecha) BETWEEN TO_DATE(fecha_desde, 'DD.MM.YYYY')
-                           AND TO_DATE(fecha_hasta, 'DD.MM.YYYY') + 86399/86400)
-    WHERE seqnum = 1;
+          WHERE TRUNC(FECHA) BETWEEN TO_DATE(FECHA_DESDE, 'DD.MM.YYYY')
+                           AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400)
+    WHERE SEQNUM = 1;
     --
     l_errors number;
     l_errno  number;
@@ -389,9 +403,9 @@ END P_INVENTORY_INS;
           ROUND(AVG(ADDRESSUSED),2)             ADDRESSUSED,
           ROUND(AVG(NUMBEROFSUBSCRIBERS),2)     NUMBEROFSUBSCRIBERS
   FROM (
-        SELECT  trunc(fecha,'DAY') fecha,
-                node,
-                cgninstanceid,
+        SELECT  TRUNC(FECHA,'DAY') FECHA,
+                NODE,
+                CGNINSTANCEID,
                 ACTIVETRANSLATIONS,
                 CREATERATE,
                 DELETERATE,
@@ -404,15 +418,15 @@ END P_INVENTORY_INS;
                 ADDRESSTOTALLYFREE,
                 ADDRESSUSED,
                 NUMBEROFSUBSCRIBERS,
-                row_number() OVER (PARTITION BY trunc(fecha,'DAY'),
-                                                node,
-                                                cgninstanceid
+                ROW_NUMBER() OVER (PARTITION BY TRUNC(FECHA,'DAY'),
+                                                NODE,
+                                                CGNINSTANCEID
                                       ORDER BY (ACTIVETRANSLATIONS) DESC,
-                                               trunc(fecha) DESC NULLS LAST) seqnum
+                                               TRUNC(FECHA) DESC NULLS LAST) SEQNUM
         from CSCO_CGN_STATS_BH)--BH
   where SEQNUM <= LIMIT_PROM
-  AND fecha BETWEEN to_date(fecha_desde,'dd.mm.yyyy') AND to_date(fecha_hasta,'dd.mm.yyyy')
-  GROUP BY fecha,node,cgninstanceid;
+  AND FECHA BETWEEN to_date(FECHA_DESDE,'DD.MM.YYYY') AND to_date(FECHA_HASTA,'DD.MM.YYYY')
+  GROUP BY FECHA,NODE,CGNINSTANCEID;
   --
   l_errors number;
   l_errno  number;
@@ -526,9 +540,9 @@ END P_INVENTORY_INS;
             ROUND(AVG(AVGUTILDEVICEAVG),2)        AVGUTILDEVICEAVG,
             ROUND(AVG(MAXUTILDEVICEAVG),2)        MAXUTILDEVICEAVG
     FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR
-    WHERE trunc(FECHA)  BETWEEN TO_DATE(FECHA_DESDE, 'DD.MM.YYYY')
+    WHERE TRUNC(FECHA)  BETWEEN TO_DATE(FECHA_DESDE, 'DD.MM.YYYY')
                            AND TO_DATE(Fecha_Hasta, 'DD.MM.YYYY') + 86399/86400
-    GROUP BY trunc(FECHA),NODE;
+    GROUP BY TRUNC(FECHA),NODE;
     --
   BEGIN
     OPEN cur(P_FECHA_DESDE,P_FECHA_HASTA);
@@ -584,7 +598,7 @@ END P_INVENTORY_INS;
                               FROM  EHEALTH_OBJECTS
                               WHERE FLAG_ENABLED = 'S'
                               AND GRUPO != 'IPRAN')
-    SELECT  '14.08.2016'                            FECHA
+    SELECT  FECHA_DESDE                             FECHA
             ,NODE
             ,ROUND(AVG(CPUUTILMAX5MINDEVICEAVG),2)  CPUUTILMAX5MINDEVICEAVG
             ,ROUND(AVG(CPUUTILAVG5MINDEVICEAVG),2)  CPUUTILAVG5MINDEVICEAVG
@@ -604,10 +618,10 @@ END P_INVENTORY_INS;
                   ,FREEBYTESDEVICEAVG
                   ,AVGUTILDEVICEAVG
                   ,MAXUTILDEVICEAVG                 
-                  ,ROW_NUMBER() OVER (PARTITION BY TRUNC(FECHA,'DAY'),
-                                                 NODE
-                                        ORDER BY CPUUTILMAX5MINDEVICEAVG
-                                        ,TRUNC(FECHA,'DAY') DESC NULLS LAST) SEQNUM
+                  ,ROW_NUMBER() OVER (PARTITION BY  TRUNC(FECHA,'DAY'),
+                                                    NODE
+                                        ORDER BY  CPUUTILMAX5MINDEVICEAVG
+                                                  ,TRUNC(FECHA,'DAY') DESC NULLS LAST) SEQNUM
           FROM  CSCO_CPU_MEM_DEVICE_AVG_BH CCMDABH,
                 OBJETOS_EHEALTH OE
           WHERE CCMDABH.NODE = OE.ELEMENT_NAME
@@ -654,7 +668,7 @@ END P_INVENTORY_INS;
                                               ' FREEBYTESDEVICEAVG => '       ||TO_CHAR(v_csco_cpu_mem_device_avg_ibhw(L_IDX).FREEBYTESDEVICEAVG)||
                                               ' AVGUTILDEVICEAVG => '         ||TO_CHAR(v_csco_cpu_mem_device_avg_ibhw(L_IDX).AVGUTILDEVICEAVG)||
                                               ' MAXUTILDEVICEAVG => '         ||TO_CHAR(v_csco_cpu_mem_device_avg_ibhw(L_IDX).MAXUTILDEVICEAVG));
-                      END LOOP;
+              END LOOP;
         END;
         EXIT WHEN cur%NOTFOUND;
       END LOOP;
@@ -689,7 +703,8 @@ END P_INVENTORY_INS;
                                                 SENDBYTES,
                                                 ROW_NUMBER() OVER( PARTITION BY NODE,FECHA ORDER BY SENDBYTES DESC) RNK 
                                         FROM CSCO_INTERFACE_HOUR
-                                        WHERE TO_CHAR(FECHA,'DD.MM.YYYY') BETWEEN FECHA_DESDE AND FECHA_HASTA
+                                        WHERE TO_CHAR(FECHA,'DD.MM.YYYY') BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+                                                AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400 --FECHA_DESDE AND FECHA_HASTA
                                       )
                                   WHERE RNK = 1
                                   ORDER BY SENDBYTES DESC)
@@ -708,7 +723,8 @@ END P_INVENTORY_INS;
                                                   RECEIVEBYTES,
                                                   ROW_NUMBER() OVER( PARTITION BY NODE,FECHA ORDER BY RECEIVEBYTES DESC) RNK 
                                           FROM CSCO_INTERFACE_HOUR
-                                          WHERE TO_CHAR(FECHA,'DD.MM.YYYY')  BETWEEN FECHA_DESDE AND FECHA_HASTA
+                                          WHERE TO_CHAR(FECHA,'DD.MM.YYYY')  BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+                                                AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400 --FECHA_DESDE AND FECHA_HASTA
                                         )
                                     WHERE RNK = 1
                                     ORDER BY RECEIVEBYTES DESC)
@@ -754,8 +770,8 @@ END P_INVENTORY_INS;
                   AVGUTILDEVICEAVG,
                   MAXUTILDEVICEAVG
           FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR CCDVAH
-          WHERE CCDVAH.NODE   = substr(v_nodo_fecha(indice),1,instr(v_nodo_fecha(indice),',')-1)
-          AND   CCDVAH.FECHA  = substr(v_nodo_fecha(indice),instr(v_nodo_fecha(indice),',')+1,length(v_nodo_fecha(indice)));--FECHA
+          WHERE CCDVAH.NODE   = SUBSTR(V_NODO_FECHA(INDICE),1,INSTR(V_NODO_FECHA(INDICE),',')-1)
+          AND   CCDVAH.FECHA  = SUBSTR(V_NODO_FECHA(INDICE),INSTR(V_NODO_FECHA(INDICE),',')+1,length(V_NODO_FECHA(INDICE)));--FECHA
         
         EXCEPTION
           WHEN OTHERS THEN
@@ -769,8 +785,8 @@ END P_INVENTORY_INS;
               g_error_log_new.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_BH',
                                           L_ERRNO,
                                           L_MSG,
-                                          'FECHA => '||substr(v_nodo_fecha(indice),instr(v_nodo_fecha(indice),',')+1,length(v_nodo_fecha(indice))-1)||
-                                          ' NODE => '||substr(v_nodo_fecha(indice),1,instr(v_nodo_fecha(indice),',')));
+                                          'FECHA => '||SUBSTR(V_NODO_FECHA(INDICE),INSTR(V_NODO_FECHA(INDICE),',')+1,LENGTH(V_NODO_FECHA(INDICE))-1)||
+                                          ' NODE => '||SUBSTR(V_NODO_FECHA(INDICE),1,INSTR(V_NODO_FECHA(INDICE),',')));
             END LOOP;
       END;
       EXIT WHEN cur%NOTFOUND;
@@ -785,7 +801,36 @@ END P_INVENTORY_INS;
                                     SQLERRM,
                                     'Fallo al insertar los datos');
   END P_CSCO_CPU_MEM_DEVICE_AVG_BH;
- 
+  --**--**--**--
+  PROCEDURE P_CALC_SUM_CPU_MEM_DEVICE_AVG(P_FECHA IN VARCHAR2) AS
+    v_dia VARCHAR2(10 CHAR) := '';
+  BEGIN
+    --
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_DAY',0,'NO ERROR','COMIENZO DE SUMARIZACION DAY P_CSCO_CPU_MEM_DEVICE_AVG_DAY('||P_FECHA||')');
+    P_CSCO_CPU_MEM_DEVICE_AVG_DAY(P_FECHA,P_FECHA);
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_DAY',0,'NO ERROR','FIN DE SUMARIZACION DAY');
+    --
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_BH',0,'NO ERROR','COMIENZO CALCULO BH P_CSCO_CPU_MEM_DEVICE_AVG_BH('||P_FECHA||')');
+    P_CSCO_CPU_MEM_DEVICE_AVG_BH(P_FECHA,P_FECHA);
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_BH',0,'NO ERROR','FIN CALCULO BH');
+    --
+    -- Si el dia actual es DOMINGO, entonces calcular sumarizacion IBHW de la semana anterior,
+    -- siempre de domingo a sabado
+    --
+    SELECT TO_CHAR(TO_DATE(P_FECHA,'DD.MM.YYYY'),'DAY')
+    INTO V_DIA
+    FROM DUAL;
+    
+    IF (TRIM(V_DIA) = 'SUNDAY') OR (TRIM(V_DIA) = 'DOMINGO') THEN
+      G_ERROR_LOG_NEW.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_IBHW',0,'NO ERROR','COMIENZO DE SUMARIZACION IBHW P_FECHA_DOMINGO => '||
+                                  to_char(to_date(P_FECHA,'DD.MM.YYYY')-7,'DD.MM.YYYY')||
+                                  ' P_FECHA_SABADO => '||TO_CHAR(TO_DATE(P_FECHA,'DD.MM.YYYY')-1,'DD.MM.YYYY'));
+      --
+      P_CSCO_CPU_MEM_DEVICE_AVG_IBHW(to_char(to_date(P_FECHA,'DD.MM.YYYY')-7,'DD.MM.YYYY'),TO_CHAR(TO_DATE(P_FECHA,'DD.MM.YYYY')-1,'DD.MM.YYYY'));
+      --
+      G_ERROR_LOG_NEW.P_LOG_ERROR('P_CSCO_CPU_MEM_DEVICE_AVG_IBHW',0,'NO ERROR','FIN DE SUMARIZACION IBHW');
+    END IF;
+  END P_CALC_SUM_CPU_MEM_DEVICE_AVG;
   --******************************************************--
   --                 EHEALTH_STAT_IP                      --
   --******************************************************--
@@ -915,6 +960,156 @@ END P_INVENTORY_INS;
                                     'Fallo al insertar los datos');
   END P_EHEALTH_STAT_IP_BH;
   --**--**--**--
+  PROCEDURE P_EHEALTH_STAT_IP_IBHW(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2) AS
+    
+    TYPE t_ehealth_stat_ip_ibhw IS TABLE OF EHEALTH_STAT_IP_IBHW%rowtype;
+    v_ehealth_stat_ip_ibhw t_ehealth_stat_ip_ibhw;
+    
+    l_errors NUMBER;
+    l_errno  NUMBER;
+    l_msg    VARCHAR2(4000 CHAR);
+    l_idx    NUMBER;
+    CURSOR CUR (FECHA_DESDE VARCHAR2, FECHA_HASTA VARCHAR2) IS
+    SELECT  FECHA_DESDE                           FECHA
+            ,ELEMENT_ID
+            ,ROUND(AVG(RECEIVEBYTES),2)           RECEIVEBYTES
+            ,ROUND(AVG(SENDBYTES),2)              SENDBYTES
+            ,ROUND(AVG(IFSPEED),2)                IFSPEED
+            ,ROUND(AVG(RECEIVEDISCARDS),2)        RECEIVEDISCARDS
+            ,ROUND(AVG(SENDDISCARDS),2)           SENDDISCARDS
+            ,ROUND(AVG(RECEIVEERRORS),2)          RECEIVEERRORS
+            ,ROUND(AVG(SENDERRORS),2)             SENDERRORS
+            ,ROUND(AVG(RECEIVETOTALPKTRATE),2)    RECEIVETOTALPKTRATE
+            ,ROUND(AVG(SENDTOTALPKTRATE),2)       SENDTOTALPKTRATE
+            ,ROUND(AVG(INQUEUEDROPS),2)           INQUEUEDROPS
+            ,ROUND(AVG(OUTQUEUEDROPS),2)          OUTQUEUEDROPS
+            ,ROUND(AVG(UPPERCENT),2)              UPPERCENT
+            ,ROUND(AVG(SENDUTIL),2)               SENDUTIL
+            ,ROUND(AVG(SENDTOTALPKTS),2)          SENDTOTALPKTS
+            ,ROUND(AVG(SENDUCASTPKTPERCENT),2)    SENDUCASTPKTPERCENT
+            ,ROUND(AVG(SENDMCASTPKTPERCENT),2)    SENDMCASTPKTPERCENT
+            ,ROUND(AVG(SENDBCASTPKTPERCENT),2)    SENDBCASTPKTPERCENT
+            ,ROUND(AVG(SENDERRORPERCENT),2)       SENDERRORPERCENT
+            ,ROUND(AVG(SENDDISCARDPERCENT),2)     SENDDISCARDPERCENT
+            ,ROUND(AVG(RECEIVEUTIL),2)            RECEIVEUTIL
+            ,ROUND(AVG(RECEIVETOTALPKTS),2)       RECEIVETOTALPKTS
+            ,ROUND(AVG(RECEIVEUCASTPKTPERCENT),2) RECEIVEUCASTPKTPERCENT
+            ,ROUND(AVG(RECEIVEMCASTPKTPERCENT),2) RECEIVEMCASTPKTPERCENT
+            ,ROUND(AVG(RECEIVEBCASTPKTPERCENT),2) RECEIVEBCASTPKTPERCENT
+            ,ROUND(AVG(RECEIVEERRORPERCENT),2)    RECEIVEERRORPERCENT
+            ,ROUND(AVG(RECEIVEDISCARDPERCENT),2)  RECEIVEDISCARDPERCENT
+            ,ROUND(AVG(SENDBCASTPKTRATE),2)       SENDBCASTPKTRATE
+            ,ROUND(AVG(RECEIVEBCASTPKTRATE),2)    RECEIVEBCASTPKTRATE
+    FROM  (SELECT  TRUNC(ESIB.FECHA,'DAY') FECHA
+                  ,ESIB.ELEMENT_ID ELEMENT_ID
+                  ,RECEIVEBYTES
+                  ,SENDBYTES
+                  ,IFSPEED
+                  ,RECEIVEDISCARDS
+                  ,SENDDISCARDS
+                  ,RECEIVEERRORS
+                  ,SENDERRORS
+                  ,RECEIVETOTALPKTRATE
+                  ,SENDTOTALPKTRATE
+                  ,INQUEUEDROPS
+                  ,OUTQUEUEDROPS
+                  ,UPPERCENT
+                  ,SENDUTIL
+                  ,SENDTOTALPKTS
+                  ,SENDUCASTPKTPERCENT
+                  ,SENDMCASTPKTPERCENT
+                  ,SENDBCASTPKTPERCENT
+                  ,SENDERRORPERCENT
+                  ,SENDDISCARDPERCENT
+                  ,RECEIVEUTIL
+                  ,RECEIVETOTALPKTS
+                  ,RECEIVEUCASTPKTPERCENT
+                  ,RECEIVEMCASTPKTPERCENT
+                  ,RECEIVEBCASTPKTPERCENT
+                  ,RECEIVEERRORPERCENT
+                  ,RECEIVEDISCARDPERCENT
+                  ,SENDBCASTPKTRATE
+                  ,RECEIVEBCASTPKTRATE
+                  ,ROW_NUMBER() OVER (PARTITION BY ESIB.ELEMENT_ID ORDER BY ORDER_COLUMN.ORDER_BY) RN
+          FROM  EHEALTH_STAT_IP_BH ESIB,
+                (SELECT ELEMENT_ID,
+                       CASE
+                        WHEN MAX(SENDBYTES) >= MAX(RECEIVEBYTES) THEN 'SENDBYTES' ELSE 'RECEIVEBYTES'
+                       END ORDER_BY
+                FROM EHEALTH_STAT_IP_BH
+                WHERE TRUNC(FECHA) BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+                                    AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400 --FECHA_DESDE AND FECHA_HASTA
+                GROUP BY ELEMENT_ID) ORDER_COLUMN
+          WHERE ESIB.ELEMENT_ID = ORDER_COLUMN.ELEMENT_ID
+          AND TRUNC(ESIB.FECHA) BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+                                  AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400) --FECHA_DESDE AND FECHA_HASTA)
+    WHERE RN < = 3
+    GROUP BY ELEMENT_ID;
+  --
+  BEGIN
+
+    OPEN CUR(P_FECHA_DESDE,P_FECHA_HASTA);
+    LOOP
+      FETCH CUR BULK COLLECT INTO v_ehealth_stat_ip_ibhw LIMIT limit_in;
+      BEGIN
+        FORALL indice IN 1 .. v_ehealth_stat_ip_ibhw.COUNT SAVE EXCEPTIONS
+          INSERT INTO EHEALTH_STAT_IP_IBHW VALUES v_ehealth_stat_ip_ibhw(indice);
+        EXCEPTION
+          WHEN OTHERS THEN
+            L_ERRORS := SQL%BULK_EXCEPTIONS.COUNT;
+            FOR indice_e IN 1 .. L_ERRORS
+            LOOP
+                L_ERRNO := SQL%BULK_EXCEPTIONS(indice_e).ERROR_CODE;
+                L_MSG   := SQLERRM(-L_ERRNO);
+                L_IDX   := SQL%BULK_EXCEPTIONS(indice_e).ERROR_INDEX;
+                
+                G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_IBHW',
+                                            l_errno,
+                                            l_msg,
+                                            'FECHA => '                   ||v_ehealth_stat_ip_ibhw(l_idx).FECHA||
+                                            ' ELEMENT_ID => '             ||to_char(v_ehealth_stat_ip_ibhw(l_idx).ELEMENT_ID)||
+                                            ' RECEIVEBYTES => '           ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEBYTES)||
+                                            ' SENDBYTES => '              ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDBYTES)||
+                                            ' IFSPEED => '                ||to_char(v_ehealth_stat_ip_ibhw(l_idx).IFSPEED)||
+                                            ' RECEIVEDISCARDS => '        ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEDISCARDS)||
+                                            ' SENDDISCARDS => '           ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDDISCARDS)||
+                                            ' RECEIVEERRORS => '          ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEERRORS)||
+                                            ' SENDERRORS => '             ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDERRORS)||
+                                            ' RECEIVETOTALPKTRATE => '    ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVETOTALPKTRATE)||
+                                            ' SENDTOTALPKTRATE => '       ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDTOTALPKTRATE)||
+                                            ' INQUEUEDROPS => '           ||to_char(v_ehealth_stat_ip_ibhw(l_idx).INQUEUEDROPS)||
+                                            ' OUTQUEUEDROPS => '          ||to_char(v_ehealth_stat_ip_ibhw(l_idx).OUTQUEUEDROPS)||
+                                            ' UPPERCENT => '              ||to_char(v_ehealth_stat_ip_ibhw(l_idx).UPPERCENT)||
+                                            ' SENDUTIL => '               ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDUTIL)||
+                                            ' SENDTOTALPKTS => '          ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDTOTALPKTS)||
+                                            ' SENDUCASTPKTPERCENT => '    ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDUCASTPKTPERCENT)||
+                                            ' SENDMCASTPKTPERCENT => '    ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDMCASTPKTPERCENT)||
+                                            ' SENDBCASTPKTPERCENT => '    ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDBCASTPKTPERCENT)||
+                                            ' SENDERRORPERCENT => '       ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDERRORPERCENT)||
+                                            ' SENDDISCARDPERCENT => '     ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDDISCARDPERCENT)||
+                                            ' RECEIVEUTIL => '            ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEUTIL)||
+                                            ' RECEIVETOTALPKTS => '       ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVETOTALPKTS)||
+                                            ' RECEIVEUCASTPKTPERCENT => ' ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEUCASTPKTPERCENT)||
+                                            ' RECEIVEMCASTPKTPERCENT => ' ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEMCASTPKTPERCENT)||
+                                            ' RECEIVEBCASTPKTPERCENT => ' ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEBCASTPKTPERCENT)||
+                                            ' RECEIVEERRORPERCENT => '    ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEERRORPERCENT)||
+                                            ' RECEIVEDISCARDPERCENT => '  ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEDISCARDPERCENT)||
+                                            ' SENDBCASTPKTRATE => '       ||to_char(v_ehealth_stat_ip_ibhw(l_idx).SENDBCASTPKTRATE)||
+                                            ' RECEIVEBCASTPKTRATE => '    ||to_char(v_ehealth_stat_ip_ibhw(l_idx).RECEIVEBCASTPKTRATE));
+            END LOOP;
+      END;
+      exit when CUR%notfound;
+    END loop;
+    COMMIT;
+    CLOSE CUR;
+    EXCEPTION
+      WHEN OTHERS THEN
+        G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_IBHW',
+                                    SQLCODE,
+                                    SQLERRM,
+                                    'P_FECHA_DESDE '||P_FECHA_DESDE||' P_FECHA_HASTA => '||P_FECHA_HASTA);
+  END P_EHEALTH_STAT_IP_IBHW;
+  --**--**--**--
   PROCEDURE P_EHEALTH_STAT_IP_DAY(P_FECHA_DESDE IN VARCHAR2,P_FECHA_HASTA IN VARCHAR2) AS
   --
     TYPE t_ehealth_stat_ip_day IS TABLE OF EHEALTH_STAT_IP_DAY%rowtype;
@@ -1023,6 +1218,36 @@ END P_INVENTORY_INS;
                                     SQLERRM,
                                     'P_FECHA_DESDE '||P_fecha_desde||' P_FECHA_HASTA => '||p_fecha_hasta);
   END P_EHEALTH_STAT_IP_DAY;
+  --**--**--**--
+  PROCEDURE P_CALC_SUM_EHEALTH_STAT_IP(P_FECHA IN VARCHAR2) AS
+    v_dia VARCHAR2(10 CHAR) := '';
+  BEGIN
+    --
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_DAY',0,'NO ERROR','COMIENZO DE SUMARIZACION DAY P_EHEALTH_STAT_IP_DAY('||P_FECHA||')');
+    P_EHEALTH_STAT_IP_DAY(P_FECHA,P_FECHA);
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_DAY',0,'NO ERROR','FIN DE SUMARIZACION DAY');
+    --
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_BH',0,'NO ERROR','COMIENZO CALCULO BH P_CSCO_CPU_MEM_DEVICE_AVG_BH('||P_FECHA||')');
+    P_EHEALTH_STAT_IP_BH(P_FECHA,P_FECHA);
+    G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_BH',0,'NO ERROR','FIN CALCULO BH');
+    --
+    -- Si el dia actual es DOMINGO, entonces calcular sumarizacion IBHW de la semana anterior,
+    -- siempre de domingo a sabado
+    --
+    SELECT TO_CHAR(TO_DATE(P_FECHA,'DD.MM.YYYY'),'DAY')
+    INTO V_DIA
+    FROM DUAL;
+    
+    IF (TRIM(V_DIA) = 'SUNDAY') OR (TRIM(V_DIA) = 'DOMINGO') THEN
+      G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_IBHW',0,'NO ERROR','COMIENZO DE SUMARIZACION IBHW P_FECHA_DOMINGO => '||
+                                  to_char(to_date(P_FECHA,'DD.MM.YYYY')-7,'DD.MM.YYYY')||
+                                  ' P_FECHA_SABADO => '||TO_CHAR(TO_DATE(P_FECHA,'DD.MM.YYYY')-1,'DD.MM.YYYY'));
+      --
+      P_EHEALTH_STAT_IP_IBHW(to_char(to_date(P_FECHA,'DD.MM.YYYY')-7,'DD.MM.YYYY'),TO_CHAR(TO_DATE(P_FECHA,'DD.MM.YYYY')-1,'DD.MM.YYYY'));
+      --
+      G_ERROR_LOG_NEW.P_LOG_ERROR('P_EHEALTH_STAT_IP_IBHW',0,'NO ERROR','FIN DE SUMARIZACION IBHW');
+    END IF;
+  END P_CALC_SUM_EHEALTH_STAT_IP;
   
 END G_CISCO_PRIME;
 /

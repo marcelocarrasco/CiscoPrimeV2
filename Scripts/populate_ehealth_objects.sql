@@ -36,7 +36,7 @@ ORDER BY HIST.ELEMENT_ID;
 --**--**--**--**--**--**--**--**--**--**--**--**--**--
 -- INSERTA LOS LINKS EN LA TABLA EHEALTH_OBJECTS
 --**--**--**--**--**--**--**--**--**--**--**--**--**--
-SELECT  (SELECT EHEALTH_ELEMENT_ID_SEQ.NEXTVAL() FROM DUAL) ELEMENT_ID,
+SELECT  --(SELECT EHEALTH_ELEMENT_ID_SEQ.NEXTVAL() FROM DUAL) ELEMENT_ID,
         DATOS.ELEMENT_ALIASES             ELEMENT_ALIASES,
         TRUNC(SYSDATE)                    VALID_START_DATE,
         TRUNC(SYSDATE)                    VALID_FINISH_DATE,
@@ -46,7 +46,7 @@ SELECT  (SELECT EHEALTH_ELEMENT_ID_SEQ.NEXTVAL() FROM DUAL) ELEMENT_ID,
         'S'                               FLAG_ENABLED,
         NULL                              GRUPO,
         NULL                              PAIS,
-        'RouterCisco'                     ELEMENT_TYPE,
+        NULL                              ELEMENT_TYPE,
         DATOS.AENDPOINT                   ELEMENT_NAME,
         DATOS.PORTNUMBERA                 INTERFACE_NAME,
         NULL                              GROUP_TYPE,
