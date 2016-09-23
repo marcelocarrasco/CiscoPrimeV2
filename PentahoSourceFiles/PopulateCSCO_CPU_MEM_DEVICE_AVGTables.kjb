@@ -89,39 +89,6 @@
       <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Load CSCO_CPU_MEM_DEVICE_AVG_DAY Table</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCSCO_CPU_MEM_DEVICE_AVG_DAYTable.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;LoadCSCO_CPU_MEM_DEVICE_AVG_DAYTable</logfile>
-      <logext>log</logext>
-      <add_date>Y</add_date>
-      <add_time>N</add_time>
-      <loglevel>Error</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>496</xloc>
-      <yloc>240</yloc>
-      </entry>
-    <entry>
       <name>Success</name>
       <description/>
       <type>SUCCESS</type>
@@ -145,7 +112,7 @@
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;LoadCSCO_CPU_MEM_DEVICE_AVG_HOURTable</logfile>
+      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;load_cpu_mem_device_avg_hour_table</logfile>
       <logext>log</logext>
       <add_date>Y</add_date>
       <add_time>N</add_time>
@@ -165,12 +132,12 @@
       <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Load CSCO_CPU_MEM_DEVICE_AVG_BH Table</name>
+      <name>Calcular Sumarizaciones CPU_MEM_DEVICE_AVG</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadCSCO_CPU_MEM_DEVICE_AVG_BHTable.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;CalcularSumarizacionesCPU_MEM_DEVICE_AVG.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -178,7 +145,7 @@
       <clear_rows>N</clear_rows>
       <clear_files>N</clear_files>
       <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;LoadCSCO_CPU_MEM_DEVICE_AVG_BHTable</logfile>
+      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;calcular_sumarizaciones_cpu&#x3a;mem_device_avg</logfile>
       <logext>log</logext>
       <add_date>Y</add_date>
       <add_time>N</add_time>
@@ -195,7 +162,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>496</xloc>
-      <yloc>384</yloc>
+      <yloc>240</yloc>
       </entry>
   </entries>
   <hops>
@@ -219,7 +186,7 @@
     </hop>
     <hop>
       <from>Load CSCO_CPU_MEM_DEVICE_AVG_HOUR Table</from>
-      <to>Load CSCO_CPU_MEM_DEVICE_AVG_DAY Table</to>
+      <to>Calcular Sumarizaciones CPU_MEM_DEVICE_AVG</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -227,16 +194,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Load CSCO_CPU_MEM_DEVICE_AVG_DAY Table</from>
-      <to>Load CSCO_CPU_MEM_DEVICE_AVG_BH Table</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Load CSCO_CPU_MEM_DEVICE_AVG_BH Table</from>
+      <from>Calcular Sumarizaciones CPU_MEM_DEVICE_AVG</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

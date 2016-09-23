@@ -226,11 +226,11 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>&#xa;SELECT  TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29; FECHA,&#xa;        NODE,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILMAX5MINDEVICEAVG&#x29;,2&#x29; CPUUTILMAX5MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILAVG5MINDEVICEAVG&#x29;,2&#x29; CPUUTILAVG5MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILMAX1MINDEVICEAVG&#x29;,2&#x29; CPUUTILMAX1MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILAVG1MINDEVICEAVG&#x29;,2&#x29; CPUUTILAVG1MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;USEDBYTESDEVICEAVG&#x29;,2&#x29;      USEDBYTESDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;FREEBYTESDEVICEAVG&#x29;,2&#x29;      FREEBYTESDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;AVGUTILDEVICEAVG&#x29;,2&#x29;        AVGUTILDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;MAXUTILDEVICEAVG&#x29;,2&#x29;        MAXUTILDEVICEAVG&#xa;FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR&#xa;WHERE TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29; &#x3d; TO_CHAR&#x28;SYSDATE-36,&#x27;DD.MM.YYYY&#x27;&#x29; --&#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;&#xa;GROUP BY TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29;,NODE</sql>
+    <sql>&#xa;SELECT  TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29; FECHA,&#xa;        NODE,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILMAX5MINDEVICEAVG&#x29;,2&#x29; CPUUTILMAX5MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILAVG5MINDEVICEAVG&#x29;,2&#x29; CPUUTILAVG5MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILMAX1MINDEVICEAVG&#x29;,2&#x29; CPUUTILMAX1MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;CPUUTILAVG1MINDEVICEAVG&#x29;,2&#x29; CPUUTILAVG1MINDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;USEDBYTESDEVICEAVG&#x29;,2&#x29;      USEDBYTESDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;FREEBYTESDEVICEAVG&#x29;,2&#x29;      FREEBYTESDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;AVGUTILDEVICEAVG&#x29;,2&#x29;        AVGUTILDEVICEAVG,&#xa;        ROUND&#x28;AVG&#x28;MAXUTILDEVICEAVG&#x29;,2&#x29;        MAXUTILDEVICEAVG&#xa;FROM  CSCO_CPU_MEM_DEVICE_AVG_HOUR&#xa;WHERE TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29; &#x3d; TO_CHAR&#x28;SYSDATE-1,&#x27;DD.MM.YYYY&#x27;&#x29; --&#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;&#xa;GROUP BY TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29;,NODE</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
+    <variables_active>N</variables_active>
     <lazy_conversion_active>Y</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
