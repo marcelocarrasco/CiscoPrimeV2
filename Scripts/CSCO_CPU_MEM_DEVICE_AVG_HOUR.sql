@@ -87,3 +87,57 @@ COMMENT ON TABLE CSCO_CPU_MEM_DEVICE_AVG_IBHW IS 'Contiene los datos de la union
 COMMENT ON COLUMN CSCO_CPU_MEM_DEVICE_AVG_IBHW.FECHA IS 'Reemplazo de la columna TIMESTAMP por ser palabra reservada';
 
 CREATE PUBLIC SYNONYM CSCO_CPU_MEM_DEVICE_AVG_IBHW FOR MCARRASCO.CSCO_CPU_MEM_DEVICE_AVG_IBHW;
+
+
+/*
+WITH  MAX_SENDBYTES AS  (SELECT NODE||','||FECHA NODE_FECHA,
+                                    NODE,
+                                    FECHA,
+                                    SENDBYTES
+                            FROM (SELECT  FECHA,
+                                          NODE,
+                                          SENDBYTES,
+                                          ROW_NUMBER() OVER( PARTITION BY NODE,TRUNC(FECHA) ORDER BY SENDBYTES DESC) RN
+                                  FROM (SELECT  
+                                                FECHA,
+                                                NODE,
+                                                SENDBYTES,
+                                                ROW_NUMBER() OVER( PARTITION BY NODE,FECHA ORDER BY SENDBYTES DESC) RNK 
+                                        FROM CSCO_INTERFACE_HOUR
+                                        WHERE TO_CHAR(FECHA,'DD.MM.YYYY') BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+                                                AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400 --FECHA_DESDE AND FECHA_HASTA
+                                      )
+                                  WHERE RNK = 1
+                                  ORDER BY SENDBYTES DESC)
+                            WHERE RN = 1),
+          MAX_RECEIVEBYTES AS (SELECT NODE||','||FECHA NODE_FECHA,
+                                      NODE,
+                                      FECHA,
+                                      RECEIVEBYTES
+                              FROM (SELECT  FECHA,
+                                            NODE,
+                                            RECEIVEBYTES,
+                                            ROW_NUMBER() OVER( PARTITION BY NODE,TRUNC(FECHA) ORDER BY RECEIVEBYTES DESC) RN
+                                    FROM (SELECT  
+                                                  FECHA,
+                                                  NODE,
+                                                  RECEIVEBYTES,
+                                                  ROW_NUMBER() OVER( PARTITION BY NODE,FECHA ORDER BY RECEIVEBYTES DESC) RNK 
+                                          FROM CSCO_INTERFACE_HOUR
+                                          WHERE TO_CHAR(FECHA,'DD.MM.YYYY')  BETWEEN TO_DATE(FECHA_DESDE,'DD.MM.YYYY')
+                                                AND TO_DATE(FECHA_HASTA, 'DD.MM.YYYY') + 86399/86400 --FECHA_DESDE AND FECHA_HASTA
+                                        )
+                                    WHERE RNK = 1
+                                    ORDER BY RECEIVEBYTES DESC)
+                              WHERE RN = 1),
+          PARES_NODE_FECHA  AS  (SELECT  CASE
+                                          WHEN  MAX_SENDBYTES.SENDBYTES > MAX_RECEIVEBYTES.RECEIVEBYTES  THEN  MAX_SENDBYTES.NODE_FECHA
+                                          WHEN  MAX_SENDBYTES.SENDBYTES < MAX_RECEIVEBYTES.RECEIVEBYTES  THEN  MAX_RECEIVEBYTES.NODE_FECHA
+                                          ELSE  MAX_SENDBYTES.NODE_FECHA
+                                        END NODE_FECHA
+                                FROM  MAX_SENDBYTES,
+                                      MAX_RECEIVEBYTES
+                                WHERE MAX_SENDBYTES.NODE = MAX_RECEIVEBYTES.NODE
+                                AND   MAX_SENDBYTES.FECHA = MAX_RECEIVEBYTES.FECHA)
+    SELECT NODE_FECHA FROM PARES_NODE_FECHA
+*/
