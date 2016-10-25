@@ -126,7 +126,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>SELECT  --ELEMENT_ID,&#xa;        DATOS.ELEMENT_ALIASES             ELEMENT_ALIASES,&#xa;		DATOS.ELEMENT_ALIASES             ELEMENT_ALIASES_NEW,&#xa;        TRUNC&#x28;SYSDATE&#x29;                    VALID_START_DATE,&#xa;        TRUNC&#x28;SYSDATE&#x29;                    VALID_FINISH_DATE,&#xa;        NULL                              TIPO,&#xa;        DATOS.AENDPOINT                   ORIGEN,&#xa;        DATOS.ZENDPOINT                   DESTINO,&#xa;        &#x27;S&#x27;                               FLAG_ENABLED,&#xa;        NULL                              GRUPO,&#xa;        NULL                              PAIS,&#xa;        NULL                              ELEMENT_TYPE,&#xa;        DATOS.AENDPOINT                   ELEMENT_NAME,&#xa;        DATOS.PORTNUMBERA                 INTERFACE_NAME,&#xa;        NULL                              GROUP_TYPE,&#xa;        NULL                              ELEMENT_IP,&#xa;        NULL                              NOMBRE_GRUPO,	&#xa;        NULL                              FRONTERA,&#xa;        NULL                              SPEED_MODIFY&#xa;FROM  &#x28; &#xa;      SELECT  AENDPOINT,&#xa;              PORTNUMBERA,&#xa;              ZENDPOINT,&#xa;              PORTNUMBERZ,&#xa;              LINKTYPE,&#xa;              ROWNUMBER,&#xa;              ELEMENT_ALIASES,&#xa;              ROW_NUMBER&#x28;&#x29; OVER &#x28;PARTITION BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ&#xa;                                 ORDER BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ&#x29; rn&#xa;      FROM  &#xa;            &#x28;-- ELEMENT_ALIASES que estan en CSCO_DEVICE_LINKS y no en EHEALTH_OBJECTS&#xa;            	SELECT  ELEMENT_ALIASES ELEMENT_ALIASES_NEW&#xa;	            FROM    CSCO_DEVICE_LINKS CSCO    &#xa;    	        MINUS&#xa;        	    SELECT  ELEMENT_ALIASES_NEW&#xa;	            FROM    EHEALTH_OBJECTS_AUX EOH&#xa;    	        WHERE   EOH.FLAG_ENABLED  &#x3d; &#x27;S&#x27;&#xa;        	    --AND     EOH.GRUPO         &#x21;&#x3d; &#x27;IPRAN&#x27;&#xa;            	--AND     EOH.ELEMENT_ALIASES_NEW IS NOT NULL&#xa;			&#x29; LINKS,&#xa;            CSCO_DEVICE_LINKS CDL&#xa;      WHERE LINKS.ELEMENT_ALIASES_NEW &#x3d; CDL.ELEMENT_ALIASES&#x29; DATOS&#xa;WHERE DATOS.rn &#x3d; 1	&#xa;</sql>
+    <sql>SELECT  --ELEMENT_ID,&#xa;        DATOS.ELEMENT_ALIASES             ELEMENT_ALIASES,&#xa;		--DATOS.ELEMENT_ALIASES             ELEMENT_ALIASES_NEW,&#xa;        TRUNC&#x28;SYSDATE&#x29;                    VALID_START_DATE,&#xa;        TRUNC&#x28;SYSDATE&#x29;                    VALID_FINISH_DATE,&#xa;        NULL                              TIPO,&#xa;        DATOS.AENDPOINT                   ORIGEN,&#xa;        DATOS.ZENDPOINT                   DESTINO,&#xa;        &#x27;S&#x27;                               FLAG_ENABLED,&#xa;        NULL                              GRUPO,&#xa;        NULL                              PAIS,&#xa;        NULL                              ELEMENT_TYPE,&#xa;        DATOS.AENDPOINT                   ELEMENT_NAME,&#xa;        DATOS.PORTNUMBERA                 INTERFACE_NAME,&#xa;        NULL                              GROUP_TYPE,&#xa;        NULL                              ELEMENT_IP,&#xa;        NULL                              NOMBRE_GRUPO,	&#xa;        NULL                              FRONTERA,&#xa;        NULL                              SPEED_MODIFY&#xa;FROM  &#x28; &#xa;      SELECT  AENDPOINT,&#xa;              PORTNUMBERA,&#xa;              ZENDPOINT,&#xa;              PORTNUMBERZ,&#xa;              LINKTYPE,&#xa;              ROWNUMBER,&#xa;              LINKS.ELEMENT_ALIASES,&#xa;              ROW_NUMBER&#x28;&#x29; OVER &#x28;PARTITION BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ&#xa;                                 ORDER BY AENDPOINT,PORTNUMBERA,ZENDPOINT,PORTNUMBERZ&#x29; rn&#xa;      FROM  &#xa;            &#x28;-- ELEMENT_ALIASES que estan en CSCO_DEVICE_LINKS y no en EHEALTH_OBJECTS&#xa;            	SELECT  ELEMENT_ALIASES --ELEMENT_ALIASES_NEW&#xa;	            FROM    CSCO_DEVICE_LINKS CSCO    &#xa;    	        MINUS&#xa;        	    SELECT  ELEMENT_ALIASES&#xa;	            FROM    EHEALTH_OBJECTS EOH&#xa;    	        WHERE   EOH.FLAG_ENABLED  &#x3d; &#x27;S&#x27;&#xa;        	    --AND     EOH.GRUPO         &#x21;&#x3d; &#x27;IPRAN&#x27;&#xa;            	--AND     EOH.ELEMENT_ALIASES_NEW IS NOT NULL&#xa;			&#x29; LINKS,&#xa;            CSCO_DEVICE_LINKS CDL&#xa;      WHERE LINKS.ELEMENT_ALIASES &#x3d; CDL.ELEMENT_ALIASES&#x29; DATOS&#xa;WHERE DATOS.rn &#x3d; 1	&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -182,7 +182,7 @@
            </partitioning>
     <connection>falda.claro.amx</connection>
     <schema/>
-    <table>EHEALTH_OBJECTS_AUX</table>
+    <table>EHEALTH_OBJECTS</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -209,10 +209,6 @@
         <field>
           <column_name>VALID_START_DATE</column_name>
           <stream_name>VALID_START_DATE</stream_name>
-        </field>
-        <field>
-          <column_name>ELEMENT_ALIASES_NEW</column_name>
-          <stream_name>ELEMENT_ALIASES</stream_name>
         </field>
         <field>
           <column_name>VALID_FINISH_DATE</column_name>

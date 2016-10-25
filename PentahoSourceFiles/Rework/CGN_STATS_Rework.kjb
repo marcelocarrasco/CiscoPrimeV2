@@ -14,7 +14,7 @@
         <parameter>
             <name>FECHA_PROC</name>
             <default_value/>
-            <description/>
+            <description>Fecha que se desea reprocesar &#x27;YYYY-MM-DD&#x27;</description>
         </parameter>
     </parameters>
     <slaveservers>
@@ -77,7 +77,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x2f;home&#x2f;oracle&#x2f;CiscoPrimeV2&#x2f;PentahoSourceFiles&#x2f;UnzipCGN_STATSFiles.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;UnzipCGN_STATSFilesRework.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

@@ -62,8 +62,52 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>SlaveOne</name><hostname>127.0.0.1</hostname><port>9002</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>slave b</name><hostname>localhost</hostname><port>8083</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>slave a</name><hostname>localhost</hostname><port>8082</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>Master</name><hostname>localhost</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>SlaveTwo</name><hostname>127.0.0.1</hostname><port>9003</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>local_8081</name><hostname>localhost</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
+        <clusterschema>
+          <name>local</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>N</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+          </slaveservers>
+        </clusterschema>
+        <clusterschema>
+          <name>localhost_cluster</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+            <name>Master</name>
+            <name>SlaveOne</name>
+            <name>SlaveTwo</name>
+          </slaveservers>
+        </clusterschema>
+        <clusterschema>
+          <name>local processing cluster</name>
+          <base_port>40000</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+            <name>Master</name>
+            <name>slave a</name>
+            <name>slave b</name>
+          </slaveservers>
+        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;02&#x2f;19 16&#x3a;05&#x3a;19.266</created_date>
@@ -124,7 +168,7 @@
     <file>
       <name>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly</name>
       <filemask>.&#x2a;&#x5c;.csv</filemask>
-      <exclude_filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;all_ana&#x7c;ALL_ANA&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</exclude_filemask>
+      <exclude_filemask>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;all_ana&#x7c;ALL_ANA&#x7c;PHYSICAL&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</exclude_filemask>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
     </file>

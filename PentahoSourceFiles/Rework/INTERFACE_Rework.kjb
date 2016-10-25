@@ -114,12 +114,12 @@
       <yloc>160</yloc>
       </entry>
     <entry>
-      <name>Populate Files Table Rework</name>
+      <name>Populate INTERACE Files Table Rework</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateFilesTableRework.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateFilesTableINTERFACERework.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -292,7 +292,7 @@
   </entries>
   <hops>
     <hop>
-      <from>Populate Files Table Rework</from>
+      <from>Populate INTERACE Files Table Rework</from>
       <to>Load INTERFACE Into Table HOUR Rework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -301,7 +301,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Populate Files Table Rework</from>
+      <from>Populate INTERACE Files Table Rework</from>
       <to>Abort job by Populate Files Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -320,7 +320,7 @@
     </hop>
     <hop>
       <from>Unzip INTERFACE Copied Files Rework</from>
-      <to>Populate Files Table Rework</to>
+      <to>Populate INTERACE Files Table Rework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
