@@ -2,8 +2,14 @@
 
 select 'create public synonym '||table_name||' for MCARRASCO.'||table_name||';'
 from user_tables
-where table_name like 'CSCO_%';
+where table_name like 'EHEALTH_%';
 
+create public synonym EHEALTH_OBJECTS_AUX for MCARRASCO.EHEALTH_OBJECTS_AUX;    
+create public synonym EHEALTH_STAT_IP_IBHW for MCARRASCO.EHEALTH_STAT_IP_IBHW;  
+create public synonym EHEALTH_STAT_IP_HOUR for MCARRASCO.EHEALTH_STAT_IP_HOUR;  
+create public synonym EHEALTH_STAT_IP_DAY for MCARRASCO.EHEALTH_STAT_IP_DAY;    
+create public synonym EHEALTH_STAT_IP_BH for MCARRASCO.EHEALTH_STAT_IP_BH;      
+create public synonym EHEALTH_OBJECTS for MCARRASCO.EHEALTH_OBJECTS;            
 
 
 --create public synonym CSCO_MEMORY_BH for MCARRASCO.CSCO_MEMORY_BH;
@@ -67,9 +73,9 @@ from user_tables
 where table_name like 'EHEALTH_%';
 
 
-grant select on EHEALTH_OBJECTS_AUX to eginer;
-grant select on EHEALTH_OBJECTS to eginer;
-grant select on EHEALTH_STAT_IP_IBHW to eginer;
-grant select on EHEALTH_STAT_IP_HOUR to eginer;
-grant select on EHEALTH_STAT_IP_DAY to eginer;
-grant select on EHEALTH_STAT_IP_BH to eginer;
+grant select on EHEALTH_OBJECTS_AUX to MSTUYCK;
+grant select on EHEALTH_OBJECTS to MSTUYCK;
+grant select on EHEALTH_STAT_IP_IBHW to MSTUYCK;
+grant select on EHEALTH_STAT_IP_HOUR to MSTUYCK;
+grant select on EHEALTH_STAT_IP_DAY to MSTUYCK;
+grant select on EHEALTH_STAT_IP_BH to MSTUYCK;
