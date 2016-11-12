@@ -1,6 +1,8 @@
 #Logs
 /PentahoLogs/*
 *.log
+/FromCORTADO/*
+/FromaFALDA/*
 
 #Others
 /exporthourly/*
