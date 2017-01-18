@@ -286,7 +286,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>672</xloc>
-      <yloc>208</yloc>
+      <yloc>320</yloc>
       </entry>
     <entry>
       <name>Cpu Device Avg End To End</name>
@@ -442,7 +442,7 @@
       <to>Load Ehealth Stat Ip Hour</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -451,7 +451,7 @@
       <to>Cpu Device Avg End To End</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -476,6 +476,15 @@
     <hop>
       <from>Memory Device Avg End To End</from>
       <to>Cpu Mem Device Avg End To End</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Interface Errors End To End</from>
+      <to>Cpu Device Avg End To End</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
