@@ -1,0 +1,268 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF8" />
+<script src="G_ERROR_LOG_NEW/report.js" type="text/javascript"></script>
+<link href="G_ERROR_LOG_NEW/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">G_ERROR_LOG_NEW</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> <BR>  Author: Carrasco Marcelo mailto: mcarrasco@harriague.com<BR>  Date: 14/03/2016<BR>  Comment: Paquete para conter la funcionalidad asociada a la tabla error_log_new.<BR></P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#clean_up">clean_up</A></B>( p_fecha IN VARCHAR2 DEFAULT SYSDATE ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Comment: Procedimiento para limpiar los datos de la tabla hasta una fecha determinada<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHA VARCHAR2 (dd.mm.yyyy) indica la fecha hasta la que se pretende eliminar filas incluida la fecha<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                         pasada como parámetro, en caso de no ser especificada, utiliza (sysdate - 1)             <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#P_LOG_ERROR">P_LOG_ERROR</A></B>( P_OBJETO in varchar , P_SQL_CODE IN NUMBER , P_SQL_ERRM IN VARCHAR2 , P_COMENTARIO IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Date: 14/03/2016<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Comment: Procedimiento para escribir en la tabla ERROR_LOG_NEW.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Param:  P_OBJETO: Procedimiento o funcion que causo el error.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          P_SQL_CODE: Número de código de la excepción más reciente.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          P_SQL_ERRM: Mensaje de error asociado a un número de error.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          P_COMENTARIO: Comentario asociado al error, usualmente contiene los parámetros de llamada a P_OBJETO.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="clean_up"></A>
+<H3>clean_up</H3><PRE>          <B>clean_up</B>( p_fecha IN VARCHAR2 DEFAULT SYSDATE ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Comment: Procedimiento para limpiar los datos de la tabla hasta una fecha determinada<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHA VARCHAR2 (dd.mm.yyyy) indica la fecha hasta la que se pretende eliminar filas incluida la fecha<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                         pasada como parámetro, en caso de no ser especificada, utiliza (sysdate - 1)             <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="P_LOG_ERROR"></A>
+<H3>P_LOG_ERROR</H3><PRE>          <B>P_LOG_ERROR</B>( P_OBJETO in varchar , P_SQL_CODE IN NUMBER , P_SQL_ERRM IN VARCHAR2 , P_COMENTARIO IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Date: 14/03/2016<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Comment: Procedimiento para escribir en la tabla ERROR_LOG_NEW.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Param:  P_OBJETO: Procedimiento o funcion que causo el error.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          P_SQL_CODE: Número de código de la excepción más reciente.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          P_SQL_ERRM: Mensaje de error asociado a un número de error.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          P_COMENTARIO: Comentario asociado al error, usualmente contiene los parámetros de llamada a P_OBJETO.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>MCARRASCO</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>G_ERROR_LOG_NEW</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>99869</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>13.05.2016&nbsp;15:29:13</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>23.05.2016&nbsp;10:30:28</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2016-05-23:10:30:28</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SHARING</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>EDITIONABLE</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ORACLE_MAINTAINED</td>
+<td>N</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 0)" class="currentrow">
+<td class="currentcell">G_TECNOTREE_CE</td>
+<td class="currentcell">MCARRASCO</td>
+<td class="currentcell">PACKAGE&nbsp;BODY</td>
+<td class="currentcell">108180</td>
+<td class="currentcell">VALID</td>
+<td class="currentcell">PACKAGE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 1)">
+<td>G_WAP_ZTE</td>
+<td>MCARRASCO</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>103242</td>
+<td>VALID</td>
+<td>PACKAGE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 2)">
+<td>G_ERROR_LOG_NEW</td>
+<td>MCARRASCO</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>99870</td>
+<td>VALID</td>
+<td>PACKAGE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 3)">
+<td>G_MOBILEUM_ASP</td>
+<td>MCARRASCO</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>106017</td>
+<td>VALID</td>
+<td>PACKAGE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 4)">
+<td>G_ALC_IPRAN</td>
+<td>MCARRASCO</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>154311</td>
+<td>VALID</td>
+<td>PACKAGE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 5)">
+<td>G_CISCO_PRIME</td>
+<td>MCARRASCO</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>99859</td>
+<td>VALID</td>
+<td>PACKAGE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 6)">
+<td>CSCO_LINKS_TAPI</td>
+<td>MCARRASCO</td>
+<td>PACKAGE&nbsp;BODY</td>
+<td>219823</td>
+<td>VALID</td>
+<td>PACKAGE</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE G_ERROR_LOG_NEW AS
+/**
+* Author: Carrasco Marcelo mailto: mcarrasco@harriague.com
+* Date: 14/03/2016
+* Comment: Paquete para conter la funcionalidad asociada a la tabla error_log_new.
+*/
+
+/**
+* Date: 14/03/2016
+* Comment: Procedimiento para escribir en la tabla ERROR_LOG_NEW.
+* Param:  P_OBJETO: Procedimiento o funcion que causo el error.
+*         P_SQL_CODE: Número de código de la excepción más reciente.
+*         P_SQL_ERRM: Mensaje de error asociado a un número de error.
+*         P_COMENTARIO: Comentario asociado al error, usualmente contiene los parámetros de llamada a P_OBJETO.
+*/
+  procedure P_LOG_ERROR(P_OBJETO in varchar,
+                        P_SQL_CODE IN NUMBER,
+                        P_SQL_ERRM IN VARCHAR2,
+                        P_COMENTARIO IN VARCHAR2);
+  /**
+  * Comment: Procedimiento para limpiar los datos de la tabla hasta una fecha determinada
+  * Param: P_FECHA VARCHAR2 (dd.mm.yyyy) indica la fecha hasta la que se pretende eliminar filas incluida la fecha
+  *                                      pasada como parámetro, en caso de no ser especificada, utiliza (sysdate - 1)             
+  */                      
+  PROCEDURE clean_up (p_fecha IN VARCHAR2 DEFAULT SYSDATE);
+end g_error_log_new;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

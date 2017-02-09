@@ -149,7 +149,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
+      <xloc>864</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -180,8 +180,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>48</yloc>
+      <xloc>864</xloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -190,39 +190,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
-      <yloc>304</yloc>
-      </entry>
-    <entry>
-      <name>Load EHEALTH_STAT_IP_HOUR Rework</name>
-      <description/>
-      <type>JOB</type>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;LoadEHEALTH_STAT_IP_HOURTableRework.kjb</filename>
-      <jobname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;PentahoLogs&#x2f;rwk_load_ehealth_stat_ip_hour_&#x24;&#x7b;FECHA_PROC&#x7d;</logfile>
-      <logext>log</logext>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Error</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>208</yloc>
+      <xloc>112</xloc>
+      <yloc>400</yloc>
       </entry>
     <entry>
       <name>CPU_DEVICE_AVG_Rework</name>
@@ -252,8 +221,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
-      <yloc>208</yloc>
+      <xloc>672</xloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>MEMORY_DEVICE_AVG_Rework</name>
@@ -283,8 +252,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>208</yloc>
+      <xloc>352</xloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>CPU_MEM_DEVICE_AVG_Rework</name>
@@ -314,8 +283,39 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>320</xloc>
-      <yloc>304</yloc>
+      <xloc>352</xloc>
+      <yloc>400</yloc>
+      </entry>
+    <entry>
+      <name>CalcularSumINTERFACE_DAY_BH_IBHW_Rework</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;CalcularSumINTERFACE_DAY_BH_IBHW_Rework.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>864</xloc>
+      <yloc>160</yloc>
       </entry>
   </entries>
   <hops>
@@ -347,33 +347,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>INTERFACE_AVAIL_Rework</from>
-      <to>INTERFACE_ERRORS_Rework</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>INTERFACE_ERRORS_Rework</from>
-      <to>Load EHEALTH_STAT_IP_HOUR Rework</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Load EHEALTH_STAT_IP_HOUR Rework</from>
-      <to>CPU_DEVICE_AVG_Rework</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>CPU_DEVICE_AVG_Rework</from>
       <to>MEMORY_DEVICE_AVG_Rework</to>
       <from_nr>0</from_nr>
@@ -394,6 +367,33 @@
     <hop>
       <from>CPU_MEM_DEVICE_AVG_Rework</from>
       <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>INTERFACE_ERRORS_Rework</from>
+      <to>CPU_DEVICE_AVG_Rework</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>INTERFACE_AVAIL_Rework</from>
+      <to>CalcularSumINTERFACE_DAY_BH_IBHW_Rework</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>CalcularSumINTERFACE_DAY_BH_IBHW_Rework</from>
+      <to>INTERFACE_ERRORS_Rework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

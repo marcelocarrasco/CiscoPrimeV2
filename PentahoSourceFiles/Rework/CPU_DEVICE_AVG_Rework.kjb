@@ -17,6 +17,30 @@
             <description/>
         </parameter>
     </parameters>
+  <connection>
+    <name>db_connection</name>
+    <server>&#x24;&#x7b;DB-HOST&#x7d;</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;DB-NAME&#x7d;</database>
+    <port>&#x24;&#x7b;DB-PORT&#x7d;</port>
+    <username>&#x24;&#x7b;DB-USER&#x7d;</username>
+    <password>&#x24;&#x7b;DB-PASSWORD&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;DB-PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
          <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
@@ -58,8 +82,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
-      <yloc>48</yloc>
+      <xloc>48</xloc>
+      <yloc>128</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -68,8 +92,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>368</yloc>
+      <xloc>208</xloc>
+      <yloc>416</yloc>
       </entry>
     <entry>
       <name>Unzip CPU_DEVICE_AVG Copied Files</name>
@@ -99,8 +123,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
-      <yloc>48</yloc>
+      <xloc>560</xloc>
+      <yloc>128</yloc>
       </entry>
     <entry>
       <name>Abort job by Unzip</name>
@@ -110,8 +134,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
-      <yloc>160</yloc>
+      <xloc>560</xloc>
+      <yloc>32</yloc>
       </entry>
     <entry>
       <name>Populate CPU_DEVICE_AVG Files Table Rework</name>
@@ -141,8 +165,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>688</xloc>
-      <yloc>80</yloc>
+      <xloc>864</xloc>
+      <yloc>128</yloc>
       </entry>
     <entry>
       <name>Abort job by Populate Files Table</name>
@@ -152,8 +176,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>928</xloc>
-      <yloc>48</yloc>
+      <xloc>864</xloc>
+      <yloc>16</yloc>
       </entry>
     <entry>
       <name>Load CPU_DEVICE_AVG Into Table HOUR Rework</name>
@@ -183,8 +207,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>688</xloc>
-      <yloc>240</yloc>
+      <xloc>864</xloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>Abort CPU_DEVICE_AVG Hourjob</name>
@@ -194,8 +218,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>688</xloc>
-      <yloc>352</yloc>
+      <xloc>864</xloc>
+      <yloc>416</yloc>
       </entry>
     <entry>
       <name>Check Files Table Rework</name>
@@ -225,8 +249,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
-      <yloc>240</yloc>
+      <xloc>528</xloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>Zip CPU_DEVICE_AVG processed files</name>
@@ -253,8 +277,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>240</yloc>
+      <xloc>208</xloc>
+      <yloc>288</yloc>
       </entry>
     <entry>
       <name>Set Environment Rework</name>
@@ -286,8 +310,24 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>176</xloc>
-      <yloc>48</yloc>
+      <xloc>192</xloc>
+      <yloc>128</yloc>
+      </entry>
+    <entry>
+      <name>SQL</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DELETE FROM CSCO_CPU_DEVICE_AVG_HOUR WHERE TO_CHAR&#x28;FECHA,&#x27;DD.MM.YYYY&#x27;&#x29; &#x3d; &#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;&#x3b;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>db_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>368</xloc>
+      <yloc>128</yloc>
       </entry>
   </entries>
   <hops>
@@ -374,6 +414,15 @@
     </hop>
     <hop>
       <from>Set Environment Rework</from>
+      <to>SQL</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SQL</from>
       <to>Unzip CPU_DEVICE_AVG Copied Files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

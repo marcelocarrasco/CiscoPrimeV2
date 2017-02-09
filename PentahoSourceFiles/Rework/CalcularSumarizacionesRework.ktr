@@ -148,7 +148,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <procedure>G_CISCO_PRIME.P_CALC_SUM_CGN_STATS</procedure>
+    <procedure>G_CISCO_PRIME.P_CALC_SUM_CGN_STATS_RWK</procedure>
     <lookup>
       <arg>
         <name>fechaNew</name>

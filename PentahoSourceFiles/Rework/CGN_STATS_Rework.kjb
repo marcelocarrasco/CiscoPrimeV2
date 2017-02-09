@@ -17,6 +17,30 @@
             <description>Fecha que se desea reprocesar &#x27;YYYY-MM-DD&#x27;</description>
         </parameter>
     </parameters>
+  <connection>
+    <name>db_connection</name>
+    <server>&#x24;&#x7b;DB-HOST&#x7d;</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;DB-NAME&#x7d;</database>
+    <port>&#x24;&#x7b;DB-PORT&#x7d;</port>
+    <username>&#x24;&#x7b;DB-USER&#x7d;</username>
+    <password>&#x24;&#x7b;DB-PASSWORD&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;DB-PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
          <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
          <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
@@ -68,8 +92,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>368</yloc>
+      <xloc>352</xloc>
+      <yloc>384</yloc>
       </entry>
     <entry>
       <name>Unzip CGN_STATS Copied Files</name>
@@ -99,7 +123,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
+      <xloc>816</xloc>
       <yloc>48</yloc>
       </entry>
     <entry>
@@ -110,8 +134,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>144</yloc>
+      <xloc>1008</xloc>
+      <yloc>48</yloc>
       </entry>
     <entry>
       <name>Populate Files Table</name>
@@ -141,8 +165,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>48</yloc>
+      <xloc>816</xloc>
+      <yloc>208</yloc>
       </entry>
     <entry>
       <name>Abort job by Populate Files Table</name>
@@ -152,8 +176,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>848</xloc>
-      <yloc>48</yloc>
+      <xloc>816</xloc>
+      <yloc>336</yloc>
       </entry>
     <entry>
       <name>Load CGN_STATS Into Table HOUR Rework</name>
@@ -183,8 +207,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>640</xloc>
-      <yloc>224</yloc>
+      <xloc>576</xloc>
+      <yloc>208</yloc>
       </entry>
     <entry>
       <name>Abort CGN_STATS Hourjob</name>
@@ -194,14 +218,14 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>224</yloc>
+      <xloc>576</xloc>
+      <yloc>320</yloc>
       </entry>
     <entry>
       <name>Zip CGN_STATS processed files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;exporthourly&#x2f;CSV&#x2f;rwk_cgn_stats_&#x24;&#x7b;FECHA_PROC&#x7d;.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;CISCO-HOME&#x7d;&#x2f;Data&#x2f;rwk_cgn_stats_&#x24;&#x7b;FECHA_PROC&#x7d;.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
       <wildcard>.&#x2a;&#x28;&#x3f;i&#x29;&#x28;cgn_stats.&#x24;&#x7b;FECHA_PROC&#x7d;&#x7c;CGN_STATS.&#x24;&#x7b;FECHA_PROC&#x7d;&#x29;.&#x2a;&#x28;&#x3f;-i&#x29;&#x5c;.csv</wildcard>
@@ -222,8 +246,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>224</yloc>
+      <xloc>128</xloc>
+      <yloc>208</yloc>
       </entry>
     <entry>
       <name>Check Files Table</name>
@@ -253,8 +277,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>368</xloc>
-      <yloc>224</yloc>
+      <xloc>304</xloc>
+      <yloc>208</yloc>
       </entry>
     <entry>
       <name>Set Environment Rework</name>
@@ -319,8 +343,40 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>144</xloc>
-      <yloc>368</yloc>
+      <xloc>128</xloc>
+      <yloc>384</yloc>
+      </entry>
+    <entry>
+      <name>Limpiar Tabla CSCO_CGN_STATS_HOUR</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DELETE FROM CSCO_CGN_STATS_HOUR WHERE TO_CHAR&#x28;FECHA,&#x27;YYYY-MM-DD&#x27;&#x29; &#x3d; &#x27;&#x24;&#x7b;FECHA_PROC&#x7d;&#x27;&#x3b;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>db_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>48</yloc>
+      </entry>
+    <entry>
+      <name>Limpiar Tabla FILES</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DELETE FROM FILES WHERE NOMBRE_CSV LIKE &#x27;&#x2f;calidad&#x2f;CiscoPrime&#x2f;exporthourly&#x2f;CGN_STATS.&#x24;&#x7b;FECHA_PROC&#x7d;&#x25;.csv&#x27;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>T</sendOneStatement>
+      <connection>db_connection</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>48</yloc>
       </entry>
   </entries>
   <hops>
@@ -397,15 +453,6 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Set Environment Rework</from>
-      <to>Unzip CGN_STATS Copied Files</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Zip CGN_STATS processed files</from>
       <to>Calcular Sumarizaciones Rework</to>
       <from_nr>0</from_nr>
@@ -417,6 +464,33 @@
     <hop>
       <from>Calcular Sumarizaciones Rework</from>
       <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Limpiar Tabla CSCO_CGN_STATS_HOUR</from>
+      <to>Unzip CGN_STATS Copied Files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set Environment Rework</from>
+      <to>Limpiar Tabla FILES</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Limpiar Tabla FILES</from>
+      <to>Limpiar Tabla CSCO_CGN_STATS_HOUR</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

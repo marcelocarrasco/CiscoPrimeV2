@@ -1,0 +1,405 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF8" />
+<script src="G_ALC_IPRAN/report.js" type="text/javascript"></script>
+<link href="G_ALC_IPRAN/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">G_ALC_IPRAN</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> <BR>    Author: Carrasco Marcelo mailto: mcarrasco@harriague.com<BR>    Date: 01/12/2016<BR>    Comment: Paquete para conter la funcionalidad asociada a NOKIA ALU IPRAN.<BR>  </P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#ALC_CALC_SUM_DAY_BH_IBHW">ALC_CALC_SUM_DAY_BH_IBHW</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Ejecuta los procedimientos de calculo de sumarizaciones en los distintos niveles. Si es DOMINGO, ejecuta el calculo<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    de IBHW.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#GET_XML_M_I_STATS_1_DATA">GET_XML_M_I_STATS_1_DATA</A></B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_M_I_S_IPRAN_RAW_TY PIPELINED ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PIPELINED FUNCTIONS</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#GET_XML_NTWQOS_1_DATA">GET_XML_NTWQOS_1_DATA</A></B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_L_IPRAN_SCNIOLR_RAW_TY PIPELINED ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#GET_XML_NTWQOS_DATA">GET_XML_NTWQOS_DATA</A></B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_L_IPRAN_SCNEOLR_RAW_TY PIPELINED ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#GET_XML_SYSTEM_STATS_1_2_DATA">GET_XML_SYSTEM_STATS_1_2_DATA</A></B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_S_M_S_IPRAN_RAW_TY PIPELINED ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#GET_XML_SYSTEM_STATS_3_DATA">GET_XML_SYSTEM_STATS_3_DATA</A></B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_S_C_S_IPRAN_TY PIPELINED ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_CARDSLOT_IPRAN_OBJ">INS_ALC_CARDSLOT_IPRAN_OBJ</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Insert los datos de la tabla XML_CARD_STATUS en la tabla ALC_CARDSLOT_IPRAN_OBJ<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_L_I_SCNEOLR_RAW">INS_ALC_L_I_SCNEOLR_RAW</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS tabla XML_NTWQOS en la tabla ALC_LAGS_IPRAN_SCNEOLR_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_L_I_SCNIOLR_RAW">INS_ALC_L_I_SCNIOLR_RAW</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS tabla XML_NTWQOS_1 en la tabla ALC_LAGS_IPRAN_SCNIOLR_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_M_I_S_IPRAN_RAW">INS_ALC_M_I_S_IPRAN_RAW</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla XML_MEDIA_INDEPEND_STATS_1 en la tabla ALC_MEDIA_INDP_STATS_IPRAN_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_PHYSICALPORT_IPRAN_OBJ">INS_ALC_PHYSICALPORT_IPRAN_OBJ</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Insert los datos de la tabla XML_MEDIA_INDP_STATS en la tabla ALC_PHYSICALPORT_IPRAN_OBJ<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_S_C_S_IPRAN_RAW">INS_ALC_S_C_S_IPRAN_RAW</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla XML_SYSTEM_STATS_3 en la tabla ALC_SYTEM_CPU_STATS_IPRAN_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_S_M_S_IPRAN_RAW">INS_ALC_S_M_S_IPRAN_RAW</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS tabla XML_SYSTEM_STATS, XML_SYSTEM_STATS_1, XML_SYSTEM_STATS_2 en la tabla ALC_SYTEM_MEM_STATS_IPRAN_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_CPUMEM_BH">INS_ALC_STATS_CPUMEM_BH</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla ALC_STATS_CPUMEM_HOUR sumarizados  a nivel BH en la tabla ALC_STATS_CPUMEM_BH<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_CPUMEM_DAY">INS_ALC_STATS_CPUMEM_DAY</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla ALC_STATS_CPUMEM_HOUR sumarizados  a nivel DAY en la tabla ALC_STATS_CPUMEM_DAY<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_CPUMEM_HOUR">INS_ALC_STATS_CPUMEM_HOUR</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS ALC_SYSTEM_CPU_STATS_IPRAN_RAW y ALC_SYSTEM_MEM_STATS_IPRAN_RAW sumarizados a nivel HOUR en<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    la tabla  ALC_STATS_CPUMEM_HOUR<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_CPUMEM_IBHW">INS_ALC_STATS_CPUMEM_IBHW</A></B>( P_FECHA_DOMINGO IN VARCHAR2 , P_FECHA_SABADO IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla ALC_STATS_CPUMEM_BH sumarizados  a nivel IBHW en la tabla ALC_STATS_CPUMEM_IBHW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_IPRAN_BH">INS_ALC_STATS_IPRAN_BH</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_STATS_IPRAN_HOUR sumarizados a nivel BH en la tabla ALC_STATS_IPRAN_BH<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_IPRAN_DAY">INS_ALC_STATS_IPRAN_DAY</A></B>( P_FECHA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_STATS_IPRAN_HOUR sumarizados a nivel DAY en la tabla ALC_STATS_IPRAN_DAY<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_IPRAN_HOUR">INS_ALC_STATS_IPRAN_HOUR</A></B>( P_FECHAHORA IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_MEDIA_INDP_STATS_IPRAN_RAW sumarizados a nivel HOUR en la tabla ALC_STATS_IPRAN_HOUR<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#INS_ALC_STATS_IPRAN_IBHW">INS_ALC_STATS_IPRAN_IBHW</A></B>( P_FECHA_DOMINGO IN VARCHAR2 , P_FECHA_SABADO IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_STATS_IPRAN_BH sumarizados a nivel IBHW en la tabla ALC_STATS_IPRAN_IBHW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="ALC_CALC_SUM_DAY_BH_IBHW"></A>
+<H3>ALC_CALC_SUM_DAY_BH_IBHW</H3><PRE>          <B>ALC_CALC_SUM_DAY_BH_IBHW</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Ejecuta los procedimientos de calculo de sumarizaciones en los distintos niveles. Si es DOMINGO, ejecuta el calculo<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    de IBHW.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="GET_XML_M_I_STATS_1_DATA"></A>
+<H3>GET_XML_M_I_STATS_1_DATA</H3><PRE>          <B>GET_XML_M_I_STATS_1_DATA</B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_M_I_S_IPRAN_RAW_TY PIPELINED ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PIPELINED FUNCTIONS<DD><DL></DL></DD></DL><HR><A NAME="GET_XML_NTWQOS_1_DATA"></A>
+<H3>GET_XML_NTWQOS_1_DATA</H3><PRE>          <B>GET_XML_NTWQOS_1_DATA</B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_L_IPRAN_SCNIOLR_RAW_TY PIPELINED ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="GET_XML_NTWQOS_DATA"></A>
+<H3>GET_XML_NTWQOS_DATA</H3><PRE>          <B>GET_XML_NTWQOS_DATA</B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_L_IPRAN_SCNEOLR_RAW_TY PIPELINED ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="GET_XML_SYSTEM_STATS_1_2_DATA"></A>
+<H3>GET_XML_SYSTEM_STATS_1_2_DATA</H3><PRE>          <B>GET_XML_SYSTEM_STATS_1_2_DATA</B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_S_M_S_IPRAN_RAW_TY PIPELINED ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="GET_XML_SYSTEM_STATS_3_DATA"></A>
+<H3>GET_XML_SYSTEM_STATS_3_DATA</H3><PRE>          <B>GET_XML_SYSTEM_STATS_3_DATA</B>( P_FECHAHORA IN VARCHAR2 ) RETURN ALC_S_C_S_IPRAN_TY PIPELINED ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_CARDSLOT_IPRAN_OBJ"></A>
+<H3>INS_ALC_CARDSLOT_IPRAN_OBJ</H3><PRE>          <B>INS_ALC_CARDSLOT_IPRAN_OBJ</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Insert los datos de la tabla XML_CARD_STATUS en la tabla ALC_CARDSLOT_IPRAN_OBJ<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_L_I_SCNEOLR_RAW"></A>
+<H3>INS_ALC_L_I_SCNEOLR_RAW</H3><PRE>          <B>INS_ALC_L_I_SCNEOLR_RAW</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS tabla XML_NTWQOS en la tabla ALC_LAGS_IPRAN_SCNEOLR_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_L_I_SCNIOLR_RAW"></A>
+<H3>INS_ALC_L_I_SCNIOLR_RAW</H3><PRE>          <B>INS_ALC_L_I_SCNIOLR_RAW</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS tabla XML_NTWQOS_1 en la tabla ALC_LAGS_IPRAN_SCNIOLR_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_M_I_S_IPRAN_RAW"></A>
+<H3>INS_ALC_M_I_S_IPRAN_RAW</H3><PRE>          <B>INS_ALC_M_I_S_IPRAN_RAW</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla XML_MEDIA_INDEPEND_STATS_1 en la tabla ALC_MEDIA_INDP_STATS_IPRAN_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_PHYSICALPORT_IPRAN_OBJ"></A>
+<H3>INS_ALC_PHYSICALPORT_IPRAN_OBJ</H3><PRE>          <B>INS_ALC_PHYSICALPORT_IPRAN_OBJ</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Insert los datos de la tabla XML_MEDIA_INDP_STATS en la tabla ALC_PHYSICALPORT_IPRAN_OBJ<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_S_C_S_IPRAN_RAW"></A>
+<H3>INS_ALC_S_C_S_IPRAN_RAW</H3><PRE>          <B>INS_ALC_S_C_S_IPRAN_RAW</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla XML_SYSTEM_STATS_3 en la tabla ALC_SYTEM_CPU_STATS_IPRAN_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_S_M_S_IPRAN_RAW"></A>
+<H3>INS_ALC_S_M_S_IPRAN_RAW</H3><PRE>          <B>INS_ALC_S_M_S_IPRAN_RAW</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS tabla XML_SYSTEM_STATS, XML_SYSTEM_STATS_1, XML_SYSTEM_STATS_2 en la tabla ALC_SYTEM_MEM_STATS_IPRAN_RAW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_CPUMEM_BH"></A>
+<H3>INS_ALC_STATS_CPUMEM_BH</H3><PRE>          <B>INS_ALC_STATS_CPUMEM_BH</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla ALC_STATS_CPUMEM_HOUR sumarizados  a nivel BH en la tabla ALC_STATS_CPUMEM_BH<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_CPUMEM_DAY"></A>
+<H3>INS_ALC_STATS_CPUMEM_DAY</H3><PRE>          <B>INS_ALC_STATS_CPUMEM_DAY</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla ALC_STATS_CPUMEM_HOUR sumarizados  a nivel DAY en la tabla ALC_STATS_CPUMEM_DAY<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_CPUMEM_HOUR"></A>
+<H3>INS_ALC_STATS_CPUMEM_HOUR</H3><PRE>          <B>INS_ALC_STATS_CPUMEM_HOUR</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de laS ALC_SYSTEM_CPU_STATS_IPRAN_RAW y ALC_SYSTEM_MEM_STATS_IPRAN_RAW sumarizados a nivel HOUR en<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    la tabla  ALC_STATS_CPUMEM_HOUR<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_CPUMEM_IBHW"></A>
+<H3>INS_ALC_STATS_CPUMEM_IBHW</H3><PRE>          <B>INS_ALC_STATS_CPUMEM_IBHW</B>( P_FECHA_DOMINGO IN VARCHAR2 , P_FECHA_SABADO IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la tabla ALC_STATS_CPUMEM_BH sumarizados  a nivel IBHW en la tabla ALC_STATS_CPUMEM_IBHW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_IPRAN_BH"></A>
+<H3>INS_ALC_STATS_IPRAN_BH</H3><PRE>          <B>INS_ALC_STATS_IPRAN_BH</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_STATS_IPRAN_HOUR sumarizados a nivel BH en la tabla ALC_STATS_IPRAN_BH<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_IPRAN_DAY"></A>
+<H3>INS_ALC_STATS_IPRAN_DAY</H3><PRE>          <B>INS_ALC_STATS_IPRAN_DAY</B>( P_FECHA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_STATS_IPRAN_HOUR sumarizados a nivel DAY en la tabla ALC_STATS_IPRAN_DAY<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_IPRAN_HOUR"></A>
+<H3>INS_ALC_STATS_IPRAN_HOUR</H3><PRE>          <B>INS_ALC_STATS_IPRAN_HOUR</B>( P_FECHAHORA IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_MEDIA_INDP_STATS_IPRAN_RAW sumarizados a nivel HOUR en la tabla ALC_STATS_IPRAN_HOUR<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="INS_ALC_STATS_IPRAN_IBHW"></A>
+<H3>INS_ALC_STATS_IPRAN_IBHW</H3><PRE>          <B>INS_ALC_STATS_IPRAN_IBHW</B>( P_FECHA_DOMINGO IN VARCHAR2 , P_FECHA_SABADO IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Inserta los datos de la ALC_STATS_IPRAN_BH sumarizados a nivel IBHW en la tabla ALC_STATS_IPRAN_IBHW<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Param: P_FECHAHORA --> DD.MM.YYYY HH24<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>MCARRASCO</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>G_ALC_IPRAN</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>154306</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>29.11.2016&nbsp;14:12:00</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>20.12.2016&nbsp;16:14:33</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2016-12-20:16:14:33</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>SHARING</td>
+<td>NONE</td>
+</tr>
+<tr>
+<td>EDITIONABLE</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>ORACLE_MAINTAINED</td>
+<td>N</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 2, 0)" class="currentrow">
+<td class="currentcell">G_ALC_IPRAN</td>
+<td class="currentcell">MCARRASCO</td>
+<td class="currentcell">PACKAGE&nbsp;BODY</td>
+<td class="currentcell">154311</td>
+<td class="currentcell">VALID</td>
+<td class="currentcell">PACKAGE</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 0)" class="currentrow">
+<td class="currentcell">ALC_S_C_S_IPRAN_TY</td>
+<td class="currentcell">MCARRASCO</td>
+<td class="currentcell">TYPE</td>
+<td class="currentcell">154454</td>
+<td class="currentcell">VALID</td>
+<td class="currentcell">TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 1)">
+<td>ALC_M_I_S_IPRAN_RAW_ROW</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154313</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 2)">
+<td>ALC_S_M_S_IPRAN_RAW_ROW</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154455</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 3)">
+<td>ALC_L_IPRAN_SCNIOLR_RAW_ROW</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154462</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 4)">
+<td>ALC_L_IPRAN_SCNEOLR_RAW_TY</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154461</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 5)">
+<td>ALC_L_IPRAN_SCNEOLR_RAW_ROW</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154460</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 6)">
+<td>ALC_M_I_S_IPRAN_RAW_TY</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154314</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 7)">
+<td>ALC_L_IPRAN_SCNIOLR_RAW_TY</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154463</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 8)">
+<td>ALC_S_M_S_IPRAN_RAW_TY</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154456</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 3, 9)">
+<td>ALC_S_C_S_IPRAN_ROW</td>
+<td>MCARRASCO</td>
+<td>TYPE</td>
+<td>154453</td>
+<td>VALID</td>
+<td>TYPE</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE G_ALC_IPRAN AS 
+  /**
+  * Author: Carrasco Marcelo mailto: mcarrasco@harriague.com
+  * Date: 01/12/2016
+  * Comment: Paquete para conter la funcionalidad asociada a NOKIA ALU IPRAN.
+  */
+  -- BULK COLLECT LIMIT
+  bulk_limit  CONSTANT PLS_INTEGER := 100;
+  -- LIMITE DE FILAS PARA LA SUMARIZACION IBHW
+  limit_in    CONSTANT PLS_INTEGER  := 3; 
+  -- PIPELINED FUNCTIONS
+  FUNCTION GET_XML_M_I_STATS_1_DATA(P_FECHAHORA IN VARCHAR2) RETURN ALC_M_I_S_IPRAN_RAW_TY PIPELINED;
+  FUNCTION GET_XML_SYSTEM_STATS_3_DATA(P_FECHAHORA IN VARCHAR2) RETURN ALC_S_C_S_IPRAN_TY PIPELINED;
+  FUNCTION GET_XML_SYSTEM_STATS_1_2_DATA(P_FECHAHORA  IN VARCHAR2) RETURN ALC_S_M_S_IPRAN_RAW_TY PIPELINED;
+  FUNCTION GET_XML_NTWQOS_DATA(P_FECHAHORA IN VARCHAR2) RETURN ALC_L_IPRAN_SCNEOLR_RAW_TY PIPELINED;
+  FUNCTION GET_XML_NTWQOS_1_DATA(P_FECHAHORA IN VARCHAR2) RETURN ALC_L_IPRAN_SCNIOLR_RAW_TY PIPELINED;
+  
+  -- PROCEDURES
+  /**
+  * Insert los datos de la tabla XML_CARD_STATUS en la tabla ALC_CARDSLOT_IPRAN_OBJ
+  */
+  PROCEDURE INS_ALC_CARDSLOT_IPRAN_OBJ(P_FECHA IN VARCHAR2);
+  /**
+  * Insert los datos de la tabla XML_MEDIA_INDP_STATS en la tabla ALC_PHYSICALPORT_IPRAN_OBJ
+  */
+  PROCEDURE INS_ALC_PHYSICALPORT_IPRAN_OBJ(P_FECHA IN VARCHAR2);
+  /**
+  * Inserta los datos de la tabla XML_MEDIA_INDEPEND_STATS_1 en la tabla ALC_MEDIA_INDP_STATS_IPRAN_RAW
+  */
+  PROCEDURE INS_ALC_M_I_S_IPRAN_RAW(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de la tabla XML_SYSTEM_STATS_3 en la tabla ALC_SYTEM_CPU_STATS_IPRAN_RAW
+  */
+  PROCEDURE INS_ALC_S_C_S_IPRAN_RAW(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de laS tabla XML_SYSTEM_STATS, XML_SYSTEM_STATS_1, XML_SYSTEM_STATS_2 en la tabla ALC_SYTEM_MEM_STATS_IPRAN_RAW
+  */
+  PROCEDURE INS_ALC_S_M_S_IPRAN_RAW(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de laS tabla XML_NTWQOS en la tabla ALC_LAGS_IPRAN_SCNEOLR_RAW
+  */
+  PROCEDURE INS_ALC_L_I_SCNEOLR_RAW(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de laS tabla XML_NTWQOS_1 en la tabla ALC_LAGS_IPRAN_SCNIOLR_RAW
+  */
+  PROCEDURE INS_ALC_L_I_SCNIOLR_RAW(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de la ALC_MEDIA_INDP_STATS_IPRAN_RAW sumarizados a nivel HOUR en la tabla ALC_STATS_IPRAN_HOUR
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_IPRAN_HOUR(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de la ALC_STATS_IPRAN_HOUR sumarizados a nivel DAY en la tabla ALC_STATS_IPRAN_DAY
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_IPRAN_DAY(P_FECHA IN VARCHAR2);
+  /**
+  * Inserta los datos de la ALC_STATS_IPRAN_HOUR sumarizados a nivel BH en la tabla ALC_STATS_IPRAN_BH
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_IPRAN_BH(P_FECHA IN VARCHAR2);
+  /**
+  * Inserta los datos de la ALC_STATS_IPRAN_BH sumarizados a nivel IBHW en la tabla ALC_STATS_IPRAN_IBHW
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_IPRAN_IBHW(P_FECHA_DOMINGO IN VARCHAR2,P_FECHA_SABADO IN VARCHAR2);
+  /**
+  * Inserta los datos de laS ALC_SYSTEM_CPU_STATS_IPRAN_RAW y ALC_SYSTEM_MEM_STATS_IPRAN_RAW sumarizados a nivel HOUR en
+  * la tabla  ALC_STATS_CPUMEM_HOUR
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_CPUMEM_HOUR(P_FECHAHORA IN VARCHAR2);
+  /**
+  * Inserta los datos de la tabla ALC_STATS_CPUMEM_HOUR sumarizados  a nivel DAY en la tabla ALC_STATS_CPUMEM_DAY
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_CPUMEM_DAY(P_FECHA IN VARCHAR2);
+  /**
+  * Inserta los datos de la tabla ALC_STATS_CPUMEM_HOUR sumarizados  a nivel BH en la tabla ALC_STATS_CPUMEM_BH
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_CPUMEM_BH(P_FECHA IN VARCHAR2);
+  /**
+  * Inserta los datos de la tabla ALC_STATS_CPUMEM_BH sumarizados  a nivel IBHW en la tabla ALC_STATS_CPUMEM_IBHW
+  * Param: P_FECHAHORA --> DD.MM.YYYY HH24
+  */
+  PROCEDURE INS_ALC_STATS_CPUMEM_IBHW(P_FECHA_DOMINGO IN VARCHAR2,P_FECHA_SABADO IN VARCHAR2);
+  /**
+  * Ejecuta los procedimientos de calculo de sumarizaciones en los distintos niveles. Si es DOMINGO, ejecuta el calculo
+  * de IBHW.
+  */
+  PROCEDURE ALC_CALC_SUM_DAY_BH_IBHW(P_FECHA IN  VARCHAR2);
+END G_ALC_IPRAN;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

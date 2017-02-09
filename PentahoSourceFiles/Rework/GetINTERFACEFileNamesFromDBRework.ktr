@@ -177,6 +177,9 @@
       <limitRowsNumber>0</limitRowsNumber>
       <logmessage/>
     <fields>
+      <field>
+        <name>NOMBRE_CSV</name>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>

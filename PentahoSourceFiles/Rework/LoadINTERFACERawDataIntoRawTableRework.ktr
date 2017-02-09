@@ -687,7 +687,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
+      <xloc>400</xloc>
       <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
